@@ -4,7 +4,7 @@
 
 > **Two people.** One speaks, one drives the page. Cues in `[brackets]` are for the driver.
 > **Never read a heading aloud** — the room can see it. Say the thing the heading doesn't.
-> **Total ≈ 430 words.** At a calm 145 wpm that is 3:00 with nothing to spare.
+> **346 spoken words ≈ 2:25 at a calm pace** — the slack is deliberate. Pauses land; rushing does not.
 
 ---
 
@@ -12,12 +12,11 @@
 
 `[page at the top]`
 
-> "We're the **Spike Girls**. We went looking for a spike in London's planning data.
-> We found one.
+> "We're the **Spike Girls**. We went looking for a spike. We found one.
 >
-> Councils have **8 weeks** to decide a planning application, and the government scores
-> them on hitting it. We took **150,000 real decisions** across **18 boroughs** and
-> **8 years**, and asked a simple question: *when* do those decisions actually happen?"
+> Councils have **8 weeks** to decide a planning application, and they're scored on
+> hitting it. We took **150,000 decisions** across **18 boroughs** and **8 years**, and
+> asked one question: *when* do they actually happen?"
 
 ---
 
@@ -25,16 +24,14 @@
 
 `[scroll to the map — Approval rate is already selected]`
 
-> "First, where you apply matters. In **Southwark**, **92%** of applications are approved.
-> In **Barking and Dagenham**, **73%**. Nineteen points, same city, same law.
+> "Where you apply matters. **Southwark** approves **92%**. **Barking and Dagenham**,
+> **73%**. Same city, same law.
 >
 > `[click Decision time]`
 >
-> And how long it takes swings too — **Redbridge** decides in **45 days**, **Bromley**
-> takes **63**.
+> Timing swings too — **Redbridge** decides in **45 days**, **Bromley** takes **63**.
 >
-> But look how tightly the middle clusters. Almost every borough lands in the same narrow
-> band. That looked boring to us — until we asked *why*."
+> But look how tightly the middle clusters. That looked boring — until we asked *why*."
 
 ---
 
@@ -42,15 +39,13 @@
 
 `[scroll to the spike chart — pause two seconds before speaking]`
 
-> "This is every decision, plotted by how close it landed to the deadline the council set
-> itself.
+> "Every decision, plotted by how close it landed to the council's own deadline.
 >
-> **The single most common day to decide a planning application in London is the last
-> legal one.** **33,000** decisions land there — **one in five of everything** — against
-> about **3,200** on any neighbouring day. **Ten times** what you'd expect.
+> **The most common day to decide a planning application in London is the last legal
+> one.** **33,000** land there — **one in five** — against about **3,200** on a
+> neighbouring day. **Ten times** expected.
 >
-> Councils aren't deciding faster. They're holding applications and clearing them at
-> the buzzer."
+> They're not deciding faster. They're clearing them at the buzzer."
 
 ---
 
@@ -58,12 +53,10 @@
 
 `[scroll to the 16-of-18 chart]`
 
-> "And it costs you. Take **Kensington** — normally **93%** of applications are approved
-> there. Decided in that rush, **83%**. Ten points gone.
+> "And it costs you. **Kensington** normally approves **93%**. In that rush, **83%**.
 >
-> **Waltham Forest** is the exception that proves it — it's flat, no penalty at all. But
-> it's one of only two. **Sixteen of eighteen boroughs** approve less when they decide
-> against the clock. Across London, **82% down to 72%**."
+> **Waltham Forest** is the exception — flat, no penalty. But it's one of only two.
+> **Sixteen of eighteen** approve less against the clock. London-wide, **82% to 72%**."
 
 ---
 
@@ -71,15 +64,15 @@
 
 `[scroll to Feature discovery]`
 
-> "So we asked the other half of the question — not *when*, but *what*.
+> "Then the other half — not *when*, but *what*.
 >
-> Think about asking a neighbour for a favour. *'Can you water my plants?'* — yes, of
-> course. *'Can you look after my dog for a month?'* — suddenly there are questions. Same
-> neighbour. Different ask.
+> Think about asking a neighbour a favour. *'Can you water my plants?'* — of course.
+> *'Can you keep my dog for a month?'* — suddenly there are questions. Same neighbour.
+> Different ask.
 >
 > Planning works exactly like that, and we can measure it. We ran the **description** of
-> every application — the applicant's own words — through a text model. It had never been
-> told what any of these things mean.
+> every application — the applicant's own words — through a text model. It was never told
+> what any of these things mean.
 >
 > It learned the size of the ask. **Rooflights: 84% approved.** **Basements: 84%.** Then
 > it falls — **new dwelling, 71%. Change of use, 68%. Converting a house into flats, 66%.**
@@ -93,17 +86,16 @@
 
 `[scroll to The classifier — the example is already typed]`
 
-> "So we built the thing that doesn't exist yet. Type what you want to build, pick your
+> "So we built the thing that doesn't exist. Type what you want to build, pick your
 > borough.
 >
 > `[point at the result]`
 >
-> Two-storey side extension and loft conversion in Kingston — **49%**. The baseline here
-> is 78%, so this is a genuinely risky application, and it tells you **which words** did
-> the damage.
+> Two-storey side extension and loft conversion in Kingston — **49%**, against a **78%**
+> baseline. And it shows you **which words** did the damage.
 >
-> Trained on **122,000** decisions, tested on **28,000** it had never seen. **ROC-AUC
-> 0.71**, and it runs entirely in your browser."
+> Trained on **122,000** decisions, tested on **28,000** it never saw. **ROC-AUC 0.71**,
+> running entirely in your browser."
 
 ---
 
