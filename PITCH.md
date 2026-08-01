@@ -14,9 +14,9 @@
 
 > "We're the **Spike Girls**. We went looking for a spike. We found one.
 >
-> Councils have **8 weeks** to decide a planning application, and they're scored on
-> hitting it. We took **150,000 decisions** across **18 boroughs** and **8 years**, and
-> asked one question: *when* do they actually happen?"
+> Councils have **8 weeks** to decide a planning application. We took **150,000
+> decisions** across **18 boroughs** and **8 years**, and asked one question:
+> *when* do they actually happen?"
 
 ---
 
