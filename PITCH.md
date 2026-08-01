@@ -67,21 +67,19 @@
 
 `[scroll to Feature discovery]`
 
-> "Then the other half — not *when*, but *what*.
+> "This is the heart of our analysis — not *when* a decision is made, but *what* is being
+> asked for.
 >
-> Think about asking a neighbour a favour. *'Can you water my plants?'* — of course.
-> *'Can you keep my dog for a month?'* — suddenly there are questions. Same neighbour.
-> Different ask.
+> Every application carries a free-text description, written by the applicant. We ran
+> **feature extraction** across all **122,000** of them — TF-IDF over **9,343** words and
+> phrases. No categories, no labels, no domain rules. Just the text.
 >
-> Planning works exactly like that, and we can measure it. We ran the **description** of
-> every application — the applicant's own words — through a text model. It was never told
-> what any of these things mean.
+> And it recovered the structure on its own. **Rooflights, 84% approved. Basements, 84%.**
+> Then it falls — **new dwelling 71%, change of use 68%, converting a house into flats
+> 66%.** Fourteen points below the London average.
 >
-> It learned the size of the ask. **Rooflights: 84% approved.** **Basements: 84%.** Then
-> it falls — **new dwelling, 71%. Change of use, 68%. Converting a house into flats, 66%.**
-> Eighteen points below the London average.
->
-> Nobody labelled these categories. **The words did it.** Ask for more, get refused more."
+> Nobody told this model what a loft conversion is. **It learned the size of the ask from
+> the words alone.**"
 
 ---
 
