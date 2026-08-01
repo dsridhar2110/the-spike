@@ -42,8 +42,10 @@
 > "Every decision, plotted by how close it landed to the council's own deadline.
 >
 > **The most common day to decide a planning application in London is the last legal
-> one.** **33,000** land there — **one in five** — against about **3,200** on a
-> neighbouring day. **Ten times** expected.
+> one.**
+>
+> On a normal day, about **3,000** decisions. On the deadline day &mdash; **33,000**.
+> **Ten times** as many.
 >
 > They're not deciding faster. They're clearing them at the buzzer."
 
