@@ -79,8 +79,7 @@
 > more households, more traffic, a different use — it gets refused.
 >
 > **81% against 68%. The system tolerates size. It resists anything that changes the
-> street.**
-"
+> street.**"
 
 ---
 
