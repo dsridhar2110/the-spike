@@ -80,9 +80,7 @@
 >
 > **81% against 68%. The system tolerates size. It resists anything that changes the
 > street.**
->
-> Nobody told this model what a loft conversion is. **It learned the size of the ask from
-> the words alone.**"
+"
 
 ---
 
