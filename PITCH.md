@@ -74,13 +74,12 @@
 > **feature extraction** across all **122,000** of them — TF-IDF over **9,343** words and
 > phrases. No categories, no labels, no domain rules. Just the text.
 >
-> And a clean split falls out. Everything above average changes the **building** —
-> rooflights, basements, loft conversions. Everything below it changes what the building
-> *is*, or how many households it holds — change of use, new dwellings, splitting a house
-> into flats.
+> And a clean split falls out. If the change stays inside your own property — rooflights,
+> basements, loft conversions — it gets approved. If it affects the people around you —
+> more households, more traffic, a different use — it gets refused.
 >
-> **81% against 68%.** Digging out an entire basement is fine. Turning one house into three
-> flats is not. **The system is far more tolerant of size than of density.**
+> **81% against 68%. The system tolerates size. It resists anything that changes the
+> street.**
 >
 > Nobody told this model what a loft conversion is. **It learned the size of the ask from
 > the words alone.**"
