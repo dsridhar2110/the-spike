@@ -1,0 +1,35 @@
+{
+ "n_train": 121781,
+ "n_test": 28026,
+ "quantiles": [
+  {
+   "q": 0.25,
+   "pinball": 6.412,
+   "baseline": 8.436,
+   "improvement_pct": 24.0
+  },
+  {
+   "q": 0.5,
+   "pinball": 9.368,
+   "baseline": 11.144,
+   "improvement_pct": 15.9
+  },
+  {
+   "q": 0.9,
+   "pinball": 7.091,
+   "baseline": 8.54,
+   "improvement_pct": 17.0
+  }
+ ],
+ "mae_model": 18.74,
+ "mae_borough": 22.15,
+ "mae_global": 22.29,
+ "coverage": {
+  "p25": 0.3069,
+  "p50": 0.5304,
+  "p90": 0.8983,
+  "band_25_90": 0.5913
+ },
+ "svd_components": 60,
+ "explained_variance": 0.4403
+}

@@ -1,0 +1,21 @@
+# ---- data ----
+# housing.sqlite is 1.4 GB — download it from the Drive link in README.md
+data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.parquet
+
+# ---- third-party event materials, not ours to redistribute ----
+docs/
+
+# ---- dev screenshots (the JSON in outputs/ IS tracked — the page needs it) ----
+outputs/*.png
+
+# ---- python ----
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+.DS_Store

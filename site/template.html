@@ -1,0 +1,647 @@
+<title>The 8-Week Cliff — check your planning odds</title>
+<style>
+:root{
+  color-scheme:light;
+  --plane:#f7f6f3; --surface:#fffffe; --raise:#f2f1ec;
+  --ink:#141310; --ink-2:#55534c; --muted:#8b887e;
+  --grid:#e3e1d9; --axis:#c6c3b8; --hair:rgba(20,19,16,.11);
+  --series:#2a78d6; --recede:#c9c8c1; --bad:#c4442f; --good:#2f7d4f; --nodata:#e7e5de; --flagfill:#f6ded8;
+  --good-soft:#8ec8a6; --good-deep:#1c5e39;
+}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){
+  color-scheme:dark;
+  --plane:#0e0e0c; --surface:#1a1a17; --raise:#232320;
+  --ink:#faf9f6; --ink-2:#c3c1b7; --muted:#8b887e;
+  --grid:#2c2c28; --axis:#3a3a35; --hair:rgba(250,249,246,.11);
+  --series:#3987e5; --recede:#4a4a44; --bad:#e0664e; --good:#4f9e6e; --nodata:#26261f; --flagfill:#3a231d;
+  --good-soft:#2f6b48; --good-deep:#7fd3a3;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --plane:#0e0e0c; --surface:#1a1a17; --raise:#232320;
+  --ink:#faf9f6; --ink-2:#c3c1b7; --muted:#8b887e;
+  --grid:#2c2c28; --axis:#3a3a35; --hair:rgba(250,249,246,.11);
+  --series:#3987e5; --recede:#4a4a44; --bad:#e0664e; --good:#4f9e6e; --nodata:#26261f; --flagfill:#3a231d;
+  --good-soft:#2f6b48; --good-deep:#7fd3a3;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 90px}
+a{color:var(--ink-2)}
+header{padding:64px 0 34px}
+.kicker{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+  font-weight:650;margin-bottom:16px}
+h1.hero{margin:0 0 18px;line-height:.86;display:flex;flex-direction:column;
+  align-items:flex-start}
+h1.hero .the,h1.hero .girls{font-size:clamp(17px,2.4vw,26px);font-weight:400;
+  letter-spacing:.44em;text-transform:uppercase;color:var(--muted)}
+h1.hero .the{padding-left:.28em}
+h1.hero .row{display:flex;align-items:baseline;gap:.34em}
+h1.hero .girls{padding-bottom:.06em;white-space:nowrap}
+h1.hero .spike{font-size:clamp(58px,13vw,132px);font-weight:800;letter-spacing:-.045em;
+  background:linear-gradient(96deg,var(--series) 8%,#7b6fd0 42%,var(--bad) 88%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  padding-right:.06em}
+@supports not (background-clip:text){h1.hero .spike{color:var(--bad)}}
+.stand b{color:var(--series);font-weight:700;font-variant-numeric:tabular-nums}
+.stand b.hot{color:var(--bad)}
+.stand{font-size:clamp(17px,2.1vw,21px);color:var(--ink-2);max-width:660px;margin:0;line-height:1.45}
+
+/* ---- the tool ---- */
+.tool{background:var(--surface);border:1px solid var(--hair);border-radius:16px;
+  padding:26px 24px;margin:30px 0 8px}
+.picker{display:flex;flex-wrap:wrap;gap:14px}
+.field{flex:1 1 220px;display:flex;flex-direction:column;gap:7px}
+.field label{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:650;
+  color:var(--ink-2)}
+select{font:inherit;font-size:16px;padding:12px 13px;border-radius:10px;
+  border:1px solid color-mix(in srgb,var(--series) 40%,transparent);
+  background:color-mix(in srgb,var(--series) 10%,transparent);
+  color:var(--ink);width:100%;cursor:pointer}
+select:focus-visible{outline:2px solid var(--series);outline-offset:2px}
+textarea:focus-visible{outline:2px solid var(--series);outline-offset:2px}
+.answer{margin-top:26px;padding-top:24px;border-top:1px solid var(--hair)}
+.verdict{font-size:clamp(19px,2.6vw,25px);line-height:1.35;font-weight:600;
+  letter-spacing:-.012em;margin:0 0 22px;text-wrap:balance}
+.verdict b{color:var(--series)}
+.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stat{flex:1 1 150px;background:var(--raise);border-radius:12px;padding:16px 17px}
+.stat .v{font-size:30px;line-height:1;letter-spacing:-.03em;font-weight:660}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.4}
+.stat.warn .v{color:var(--bad)}
+.stat .v.blue{color:var(--series)}
+.hotword{color:var(--bad);font-weight:660}
+.rush{margin-top:22px;padding:20px;border-radius:12px;background:var(--raise);
+  border-left:3px solid var(--bad)}
+.rush h3{margin:0 0 6px;font-size:15.5px;font-weight:660}
+.rush p{margin:0 0 16px;font-size:14.5px;color:var(--ink-2);max-width:none}
+.cmp{display:flex;flex-direction:column;gap:10px}
+.cmp .row{display:flex;align-items:center;gap:12px;font-size:14px}
+.cmp .lab{flex:0 0 158px;color:var(--ink-2)}
+.cmp .track{flex:1;display:block;height:22px;background:var(--plane);
+  border:1px solid var(--hair);border-radius:5px;overflow:hidden}
+.cmp .fill{display:block;height:100%;border-radius:4px 0 0 4px}
+.cmp .val{flex:0 0 54px;text-align:right;font-weight:650;font-variant-numeric:tabular-nums}
+.basis{font-size:12.5px;color:var(--muted);margin-top:16px}
+.basis.tiny{font-size:11.5px;line-height:1.45}
+.pickbar{position:sticky;top:0;z-index:8;background:var(--plane);
+  padding:11px 0 10px;border-bottom:1px solid var(--hair);font-size:13.5px;
+  display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.pickbar b{font-weight:660}
+.pickbar .clear{font-size:12.5px;color:var(--ink-2);cursor:pointer;border:1px solid var(--hair);
+  background:var(--surface);border-radius:7px;padding:4px 10px;font-family:inherit}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+@media (max-width:860px){.duo{grid-template-columns:1fr}}
+.pane{margin:0;background:var(--surface);border:1px solid var(--hair);
+  border-radius:14px;padding:16px 16px 10px}
+.paneh{margin:0 0 8px;font-size:13px;font-weight:650;color:var(--ink-2)}
+.slope.dimmed line{stroke-opacity:.28} .slope.dimmed circle{opacity:.3}
+.slope.dimmed .slopelab{opacity:.35}
+.slope.selected line{stroke-opacity:1!important} .slope.selected circle{opacity:1!important}
+.slope.selected .slopelab{opacity:1!important;font-weight:660;fill:var(--ink)}
+.segs{display:inline-flex;gap:3px;padding:3px;background:var(--raise);
+  border-radius:11px;margin:6px 0 18px;flex-wrap:wrap}
+.seg{font-size:13px;padding:8px 14px;border-radius:8px;cursor:pointer;border:0;
+  background:transparent;color:var(--ink-2);font-family:inherit;font-weight:560}
+.seg[aria-pressed="true"]{background:var(--surface);color:var(--ink);
+  box-shadow:0 1px 3px rgba(0,0,0,.10)}
+.bigstat{font-size:clamp(20px,2.7vw,28px);letter-spacing:-.02em;text-transform:none;
+  color:var(--ink-2);font-weight:600;margin:0 0 18px;line-height:1.25}
+.bigstat b{color:var(--series);font-weight:700;font-variant-numeric:tabular-nums}
+.bigstat i{color:var(--axis);font-style:normal;padding:0 2px}
+.mapwrap{display:flex;gap:18px;align-items:flex-start;background:var(--surface);
+  border:1px solid var(--hair);border-radius:16px;padding:14px}
+#c-map{flex:1 1 auto;min-width:0;max-height:580px}
+@media (max-width:820px){.mapwrap{flex-direction:column}#c-map{max-height:none}}
+.brg{transition:opacity .12s}
+.brg.live{cursor:pointer}
+.mapwrap:hover .brg.live{opacity:.72}
+.brg.live:hover,.brg.sel{opacity:1!important;stroke:var(--ink);stroke-width:2.5}
+.brg.flag:hover,.brg.flag.sel{stroke:var(--bad);stroke-width:3.5}
+.mapcard.flagged{border-color:var(--bad)}
+.mapcard .flagwhy{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin:2px 0 0}
+.mapcard .flagtag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;
+  letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--bad);
+  background:var(--flagfill);padding:4px 9px;border-radius:6px;margin-bottom:11px}
+.mapcard .flagbig{font-size:40px;line-height:1;font-weight:700;color:var(--bad);
+  letter-spacing:-.03em;margin:4px 0 2px}
+.mapcard .flagsub{font-size:12.5px;color:var(--ink-2);margin:0 0 12px}
+.mapcard.flagged{border-color:var(--bad);background:var(--flagfill)}
+.maplab{pointer-events:none}
+.maplab text{font-size:23px;fill:var(--ink);font-weight:640;paint-order:stroke;
+  stroke:var(--surface);stroke-width:6px;stroke-linejoin:round}
+.maplab text.big{font-size:29px;font-weight:700}
+
+.mapcard{flex:0 0 292px;align-self:stretch;background:var(--raise);
+  border:1px solid var(--hair);border-radius:13px;padding:16px 17px}
+.mapcard:empty{display:flex;align-items:center;justify-content:center}
+.mapcard:empty::after{content:"Click a borough";color:var(--muted);font-size:13px}
+.mapcard h3{margin:0 0 12px;font-size:16px;font-weight:660}
+.mrow{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;
+  border-bottom:1px solid var(--hair)}
+.mrow:last-child{border-bottom:0}
+.mrow span{color:var(--muted)} .mrow b{font-variant-numeric:tabular-nums;font-weight:640}
+.mrow b.bad{color:var(--bad)} .mrow b.good{color:var(--good)}
+.scale{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12px;color:var(--muted)}
+.scale i{display:block;width:30px;height:11px;border-radius:2px}
+.slopehead{font-size:14px;fill:var(--ink-2);font-weight:620}
+.slopelab{font-size:14px;fill:var(--ink-2)}
+.slopelab.strong{font-weight:640;fill:var(--ink)}
+.colhead{font-size:11.5px;fill:var(--muted);font-weight:640;letter-spacing:.03em}
+.slope:hover line{stroke-opacity:1;stroke-width:3.5}
+.slope:hover .slopelab{fill:var(--ink);font-weight:650}
+.typelab{font-size:14px;fill:var(--ink-2)}
+.typeval{font-size:14px;fill:var(--ink);font-weight:640;font-variant-numeric:tabular-nums}
+.nodata-key{display:inline-flex;align-items:center;gap:6px;margin-left:10px}
+.flow{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 8px}
+.fcol{flex:1 1 235px;background:var(--surface);border:1px solid var(--hair);
+  border-radius:14px;padding:19px 18px}
+.fcol h4{margin:0 0 13px;font-size:13px;font-weight:660;letter-spacing:-.005em}
+.fcol.ok h4{color:var(--good)} .fcol.no h4{color:var(--bad)} .fcol.out h4{color:var(--series)}
+.fcol ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.fcol li{font-size:14px;line-height:1.4}
+.fcol li b{display:block;color:var(--ink);font-weight:620}
+.fcol li span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.fcol.no li b{text-decoration:line-through;text-decoration-color:var(--bad);
+  text-decoration-thickness:1.5px;color:var(--ink-2)}
+.fnote{font-size:12.5px;color:var(--muted);margin:14px 0 0;max-width:none}
+#c-bunch{max-height:330px}
+#c-slope,#c-types{max-width:830px;margin-inline:auto}
+.capnum{color:var(--series);font-weight:660;font-variant-numeric:tabular-nums}
+.capnum.bad{color:var(--bad)}
+figcaption{color:var(--ink-2)}
+.timeline{margin-top:4px}
+.tlbar{position:relative;height:30px;background:var(--raise);border-radius:8px;
+  border:1px solid var(--hair)}
+.tlfill{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--series) 34%,transparent);
+  border-radius:6px}
+.tlmark{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--series);border-radius:2px}
+.tl56{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--bad);opacity:.75}
+.tlkey{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--muted);margin-top:9px}
+.tlkey b{color:var(--series);font-weight:700;font-variant-numeric:tabular-nums}
+.tllegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;
+  color:var(--muted);align-items:center}
+.tllegend span{display:inline-flex;align-items:center;gap:6px}
+.tllegend i{display:block;border-radius:2px}
+.tllegend .k-band{width:16px;height:10px;background:color-mix(in srgb,var(--series) 34%,transparent)}
+.tllegend .k-mid{width:3px;height:13px;background:var(--series)}
+.tllegend .k-56{width:2px;height:13px;background:var(--bad)}
+textarea{font:inherit;font-size:16px;padding:12px 13px;border-radius:10px;width:100%;
+  border:1px solid var(--axis);background:var(--raise);color:var(--ink);resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.chip{font-size:12.5px;padding:7px 13px;border-radius:99px;cursor:pointer;
+  border:1px solid var(--series);background:var(--series);color:#fff;font-weight:560;
+  transition:filter .12s}
+.chip:hover{filter:brightness(1.16)}
+.gauge{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.gauge .big{font-size:clamp(44px,8vw,64px);line-height:1;font-weight:670;letter-spacing:-.035em}
+.gauge .cap{font-size:15px;color:var(--ink-2);max-width:300px}
+.gauge .cap strong{display:block;color:var(--ink);font-size:17px;font-weight:660;
+  letter-spacing:-.01em}
+.gauge .baseline{display:block;margin-top:7px;font-size:13px;color:var(--muted)}
+.gauge .baseline b{color:var(--series);font-weight:660;font-variant-numeric:tabular-nums}
+.words{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.w{font-size:13px;padding:5px 10px;border-radius:7px;font-variant-numeric:tabular-nums}
+.w.up{background:color-mix(in srgb,var(--good) 17%,transparent);color:var(--good)}
+.w.dn{background:color-mix(in srgb,var(--bad) 17%,transparent);color:var(--bad)}
+.sub{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:650;
+  margin:22px 0 9px;color:var(--ink-2)}
+.simtoggle{font:inherit;font-size:13px;font-weight:570;cursor:pointer;margin-top:6px;
+  padding:9px 14px;border-radius:9px;color:var(--series);
+  border:1px solid color-mix(in srgb,var(--series) 34%,transparent);
+  background:color-mix(in srgb,var(--series) 11%,transparent)}
+.simtoggle:hover{background:var(--series);color:#fff}
+.simgroup{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;
+  margin:14px 0 7px}
+.simgroup.no{color:var(--bad)} .simgroup.yes{color:var(--good)}
+.sim{display:flex;flex-direction:column;gap:7px}
+.simrow{display:flex;gap:12px;align-items:baseline;font-size:13.5px;padding:9px 12px;
+  background:var(--raise);border-radius:9px}
+.simrow .o{flex:0 0 74px;font-weight:650;font-size:12px}
+.simrow .o.y{color:var(--good)} .simrow .o.n{color:var(--bad)}
+.simrow .d{flex:1;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.simrow .m{flex:0 0 90px;text-align:right;color:var(--muted);font-size:12px}
+
+section{padding:52px 0;border-top:1px solid var(--hair)}
+h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  font-weight:650;margin:0 0 10px}
+.lede{font-size:clamp(20px,2.8vw,27px);line-height:1.28;letter-spacing:-.016em;
+  margin:0 0 20px;font-weight:640;max-width:700px;text-wrap:balance}
+p{max-width:720px;color:var(--ink-2);margin:0 0 15px}
+p strong{color:var(--ink);font-weight:630}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:14px;
+  padding:24px 22px 16px;margin:24px 0}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--muted);margin-top:13px;line-height:1.5;max-width:620px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.tick{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.axlabel{font-size:12px;fill:var(--ink-2)}
+.dlabel{font-size:12px;fill:var(--ink);font-weight:660}
+.scroller{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:430px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--hair);white-space:nowrap}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:650}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.hi td{background:color-mix(in srgb,var(--series) 10%,transparent)}
+details{margin-top:18px}
+summary{cursor:pointer;font-size:13px;color:var(--ink-2);padding:7px 0;font-weight:570}
+.check{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair);
+  font-size:14.5px;color:var(--ink-2);align-items:baseline}
+.check:last-child{border-bottom:0}
+.check b{color:var(--ink);font-weight:630}
+.pass{color:var(--good);font-weight:750;flex:0 0 auto}
+.bigstat b.grad{background:linear-gradient(96deg,var(--series) 0%,#7b6fd0 55%,var(--bad) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+@supports not (background-clip:text){.bigstat b.grad{color:var(--series)}}
+.spec{margin:22px 0 0;display:grid;gap:0}
+.spec div{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:13px 0;
+  border-bottom:1px solid var(--hair);align-items:baseline}
+.spec div:last-child{border-bottom:0}
+@media (max-width:700px){.spec div{grid-template-columns:1fr;gap:4px}}
+.spec dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  color:var(--muted)}
+.spec dd{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.spec dd b{color:var(--series);font-weight:660;font-variant-numeric:tabular-nums}
+.spec dd em{color:var(--ink);font-style:normal;font-weight:600}
+.warnbox{border-left:3px solid var(--bad);padding:3px 0 3px 17px;margin:24px 0}
+.warnbox p{margin:0;font-size:14.5px}
+footer{padding:36px 0;font-size:12.5px;color:var(--muted)}
+.tt{position:fixed;pointer-events:none;background:var(--ink);color:var(--plane);
+  padding:7px 11px;border-radius:8px;font-size:12.5px;opacity:0;transition:opacity .1s;
+  z-index:9;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Spike Girls SB &middot; House London #0 &middot; Data Brief DD</div>
+  <h1 class="hero"><span class="the">The</span><span class="row"><span class="spike">Spike</span><span class="girls">Girls</span></span></h1>
+  <p class="stand"><b>1 in 5</b> London planning decisions lands on the exact last legal day
+  &mdash; <b class="hot">10.4&times;</b> more than chance. Those decisions are approved
+  <b class="hot">10 points</b> less often.</p>
+</header>
+
+<section>
+  <h2 class="bigstat"><b>149,813</b> planning decisions <i>·</i> <b>18</b> boroughs
+  <i>·</i> <b>8</b> years</h2>
+  <div class="segs" id="mapseg"></div>
+  <div class="mapwrap">
+    <svg id="c-map" role="img" aria-label="London boroughs shaded by planning metric"></svg>
+    <div class="mapcard" id="mapcard"></div>
+  </div>
+  <div class="scale" id="mapscale"></div>
+  <p class="basis" id="mapnote"></p>
+</section>
+
+<section>
+  <h2 class="bigstat"><b>1 in 5</b> decisions lands on the deadline day</h2>
+  <figure>
+    <svg id="c-bunch" role="img"
+      aria-label="Decisions by days from the deadline, with a tenfold spike on day zero"></svg>
+    <figcaption id="cap-bunch"></figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2 class="bigstat"><b>16</b> of <b>18</b> boroughs approve less when they decide in the rush</h2>
+  <figure>
+    <svg id="c-slope" role="img"
+      aria-label="Approval rate normally versus in the deadline rush, by borough"></svg>
+  </figure>
+</section>
+
+<section>
+  <h2 class="bigstat"><b>Feature discovery</b> &mdash; ask for more, get refused more</h2>
+  <figure>
+    <svg id="c-types" role="img" aria-label="Approval rate by development type"></svg>
+  </figure>
+</section>
+
+<section>
+  <h2 class="bigstat"><b>The classifier</b> &mdash; type a proposal, get its odds</h2>
+  <div class="tool">
+    <div class="field" style="margin-bottom:14px">
+      <label for="q">Describe what you want to build</label>
+      <textarea id="q" rows="2" placeholder="e.g. Single storey rear extension with rooflights"></textarea>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="picker">
+      <div class="field"><label for="b">Your borough</label><select id="b"></select></div>
+      <div class="field"><label for="t">Type of application</label><select id="t"></select></div>
+    </div>
+    <div class="answer" id="answer"></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="bigstat">The <b class="grad">Science</b> behind it all</h2>
+  <dl class="spec">
+    <div><dt>Data</dt><dd><b>343,141</b> London planning applications from UK PlanIt
+      &rarr; <b>149,813</b> after filters. <b>18</b> boroughs, <b>2018&ndash;2025</b>.
+      One table, no joins.</dd></div>
+    <div><dt>Constraint</dt><dd>Only what is known <em>at submission</em>. Decision date,
+      public comments, who decided, appeal outcome &mdash; all excluded. They leak the
+      future.</dd></div>
+    <div><dt>Features</dt><dd><b>TF-IDF</b> over <b>9,343</b> words and phrases from the
+      application description, plus borough and application type.</dd></div>
+    <div><dt>Models</dt><dd>Logistic regression (approval) &middot; gradient-boosted
+      quantile regression (timing) &middot; bunching estimator (the spike).</dd></div>
+    <div><dt>Split</dt><dd>Train <b>2018&ndash;2023</b> (<b>122,806</b>) &middot; test
+      <b>2024&ndash;2025</b> (<b>28,073</b>). Time-ordered, never random.</dd></div>
+    <div><dt>Validation</dt><dd>Walk-forward &mdash; retrained and retested <b>5</b> times,
+      one year at a time.</dd></div>
+    <div><dt>Success metric</dt><dd><b>ROC-AUC 0.7103</b> &middot; refusal PR-AUC
+      <b>0.3759</b> against a <b>0.1897</b> base rate &middot; Brier <b>0.1395</b>.</dd></div>
+    <div><dt>Stability</dt><dd><b>0.7085 &plusmn; 0.0072</b> across the five folds &mdash;
+      no drift, no lucky year.</dd></div>
+    <div><dt>Robustness</dt><dd><b>6</b> artifact checks on the spike &mdash; wrong clock,
+      deadline extensions, one-off period, machine-stamped dates, batch upload, one bad
+      borough. All passed.</dd></div>
+  </dl>
+</section>
+
+<footer>
+  <p>House London #0 · Newspeak House · 1 August 2026 · Data Brief DD.<br>
+  Source: 343k London planning applications from
+  <a href="https://www.planit.org.uk/">UK PlanIt</a>, housing-relevance filtered.
+  Analysis: minor/householder applications, 2018&ndash;2025, 18 boroughs passing
+  data-quality checks. One table, no joins. Contains no WhereToBuild data.</p>
+</footer>
+</div>
+<div class="tt" id="tt"></div>
+
+<script>__PREDICTOR__</script>
+<script>__VISUALS__</script>
+<script>
+const PB = __PB__;
+const MAP = __MAP__, APPR = __APPR__, TD = __TDD__;
+const D = __DATA__, T = __TOOL__, M = __MODEL__, LM = __LIVE__, DG = __DAYS__;
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('en-GB');
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a = {}) => { const e = document.createElementNS(NS, t);
+  for (const k in a) e.setAttribute(k, a[k]); return e; };
+const tt = $('#tt');
+const hover = (n, html) => {
+  n.addEventListener('pointerenter', () => { tt.innerHTML = html; tt.style.opacity = 1; });
+  n.addEventListener('pointermove', e => {
+    tt.style.left = Math.min(e.clientX + 14, innerWidth - tt.offsetWidth - 10) + 'px';
+    tt.style.top = (e.clientY - 40) + 'px'; });
+  n.addEventListener('pointerleave', () => tt.style.opacity = 0);
+};
+
+/* =================== THE TOOL =================== */
+const ARCH_PAT = DG.archetype_patterns.map(([n, p]) => [n, new RegExp(p, 'i')]);
+const archOf = txt => (ARCH_PAT.find(([, re]) => re.test(txt)) || ['other'])[0];
+const daysFor = (b, ty, txt) => {
+  const a = archOf(txt);
+  return (DG.grid[b] && DG.grid[b][ty] && DG.grid[b][ty][a])
+      || (DG.fallback[b] && DG.fallback[b][ty]) || null;
+};
+const ARCH_LABEL = { flats: 'conversion into flats', changeuse: 'change of use',
+  newdwell: 'a new dwelling', twostorey: 'a two-storey scheme', loft: 'a loft conversion',
+  extension: 'an extension', other: 'this kind of work' };
+
+const TYPE_LABEL = { Full: 'Full application', Outline: 'Outline application',
+  Conditions: 'Discharge of conditions', Amendment: 'Amendment to an approval' };
+const SHOW_TYPES = ['Full', 'Outline', 'Conditions', 'Amendment'];
+const EXAMPLES = [
+  'Single storey rear extension with rooflights',
+  'Two storey side extension and loft conversion',
+  'Conversion of dwelling into 3 self contained flats',
+  'Loft conversion with rear dormer',
+  'Demolition of garage and erection of a new dwelling',
+];
+
+(function () {
+  const bs = Object.keys(T.boroughs).sort();
+  $('#b').innerHTML = bs.map(b => `<option>${b}</option>`).join('');
+  $('#chips').innerHTML = EXAMPLES.map(e => `<span class="chip">${e}</span>`).join('');
+  $('#chips').addEventListener('click', e => {
+    if (!e.target.classList.contains('chip')) return;
+    $('#q').value = e.target.textContent; draw();
+  });
+
+  const fillTypes = () => {
+    const rec = T.boroughs[$('#b').value], cur = $('#t').value;
+    const avail = SHOW_TYPES.filter(x => rec.by_type[x]);
+    $('#t').innerHTML = avail.map(x => `<option value="${x}">${TYPE_LABEL[x]}</option>`).join('');
+    if (avail.includes(cur)) $('#t').value = cur;
+  };
+
+  const draw = () => {
+    const b = $('#b').value, ty = $('#t').value, q = $('#q').value.trim();
+    const rec = T.boroughs[b];
+    const c = rec.by_type[ty] || rec;
+    const ab = c.approval_bunched ?? rec.approval_bunched;
+    const anb = c.approval_not_bunched ?? rec.approval_not_bunched;
+
+    if (q.length < 4) {
+      $('#answer').innerHTML = `<p class="basis">Describe your proposal above, or tap an
+        example, to see a prediction. Baseline for ${(TYPE_LABEL[ty]||ty).toLowerCase()}s in
+        ${b}: <strong>${c.approval}%</strong> approved across ${fmt(c.n)} decisions.</p>`;
+      return;
+    }
+
+    const r = predict(q, b, ty, LM);
+    const dd = daysFor(b, ty, q);
+    const tlMax = dd ? Math.max(dd.p90 * 1.12, 70) : 120;
+    const pct = Math.round(r.p * 100);
+    const sims = similar(q, LM, b, 60);
+    // Weight the display toward refusals so the examples reinforce the prediction rather
+    // than contradicting it — the corpus is 80% approved, so a plain top-10 is nearly all
+    // approvals. Labelled by outcome, so this is never read as a rate.
+    const refused = sims.filter(x => x.a === 0).slice(0, 6);
+    const approved = sims.filter(x => x.a === 1).slice(0, 3);
+    const row = s => `
+      <div class="simrow">
+        <span class="o ${s.a ? 'y' : 'n'}">${s.a ? 'APPROVED' : 'REFUSED'}</span>
+        <span class="d" title="${s.d.replace(/"/g, '&quot;')}">${s.d}</span>
+        <span class="m">${s.b}, ${s.y}</span>
+      </div>`;
+    const verdict = pct >= 85 ? 'Very likely approved' : pct >= 70 ? 'Likely approved'
+      : pct >= 55 ? 'Could go either way' : 'At real risk of refusal';
+
+    $('#answer').innerHTML = `
+      <div class="gauge">
+        <span class="big" style="color:${pct >= 70 ? 'var(--good)' : pct >= 55 ? 'var(--ink)' : 'var(--bad)'}">${pct}%</span>
+        <span class="cap"><strong>${verdict} in ${b}</strong>
+        <span class="baseline">Baseline for ${(TYPE_LABEL[ty]||ty).toLowerCase()}s here:
+        <b>${c.approval}%</b></span></span>
+      </div>
+
+      ${(r.helped.length || r.hurt.length) ? `
+      <div class="sub">What moved the prediction</div>
+      <div class="words">
+        ${r.helped.map(([w]) => `<span class="w up">↑ ${w}</span>`).join('')}
+        ${r.hurt.map(([w]) => `<span class="w dn">↓ ${w}</span>`).join('')}
+      </div>
+      <p class="basis" style="margin-top:9px">Learned from 122,806 past decisions. The model
+      matched ${r.matched} phrase${r.matched === 1 ? '' : 's'} in your description.</p>` : ''}
+
+      ${sims.length ? `
+      <div class="sub">Real applications that said something similar</div>
+      <button class="simtoggle" id="simbtn" aria-expanded="false">
+        What actually happened?</button>
+      <div id="simwrap" hidden>
+        <p class="basis" style="margin:12px 0 0">Closest matches from a 6,480-application
+        sample, grouped by outcome &mdash; examples, not a rate. The prediction above uses
+        all 122,806.</p>
+        ${refused.length ? `<div class="simgroup no">Refused &mdash; closest ${refused.length}</div>
+        <div class="sim">${refused.map(row).join('')}</div>` : ''}
+        ${approved.length ? `<div class="simgroup yes">Approved &mdash; closest ${approved.length}</div>
+        <div class="sim">${approved.map(row).join('')}</div>` : ''}
+      </div>` : ''}
+
+      <div class="sub">How long will it take?</div>
+      ${dd ? `
+      <div class="timeline">
+        <div class="tlbar">
+          <span class="tlfill" style="left:${100*dd.p25/tlMax}%;width:${100*(dd.p90-dd.p25)/tlMax}%"></span>
+          <span class="tlmark" style="left:${100*dd.p50/tlMax}%"></span>
+          <span class="tl56" style="left:${100*56/tlMax}%"></span>
+        </div>
+        <div class="tlkey">
+          <span><b>${dd.p50}</b> days most likely</span>
+          <span><b>${dd.p25}&ndash;${dd.p90}</b> day range</span>
+          <span>1 in 10 exceed <b>${dd.p90}</b></span>
+        </div>
+        <div class="tllegend">
+          <span><i class="k-band"></i>middle of the range</span>
+          <span><i class="k-mid"></i>most likely</span>
+          <span><i class="k-56"></i>the 8-week legal deadline</span>
+        </div>
+      </div>
+      <p class="basis tiny" style="margin-top:10px">Predicted by a quantile model for
+      ${ARCH_LABEL[archOf(q)]} in ${b} (${fmt(dd.n)} comparable cases; their actual median
+      was ${dd.actual_p50} days). Typical error &plusmn;${Math.round(DG.performance.mae_model)} days
+      &mdash; treat it as a range, not a date.</p>` : ''}
+      <div class="stats" style="margin-top:14px">
+        <div class="stat warn"><div class="v">${c.bunch}%</div>
+          <div class="l">decided on the last legal day &mdash;
+          <b class="hotword">the deadline rush</b></div></div>
+        <div class="stat"><div class="v blue">${c.median_days} days</div>
+          <div class="l">what actually happened to the ${fmt(c.n)} real applications like this</div></div>
+      </div>
+
+      ${(ab == null || anb == null) ? '' : `
+      <div class="rush">
+        <h3>The deadline rush costs you</h3>
+        <p>${b} decides <strong>${c.bunch}%</strong> of these on the last legal day. Those
+        applications are approved less often:</p>
+        <div class="cmp">
+          <div class="row"><span class="lab">Decided normally</span>
+            <span class="track"><span class="fill" style="width:${anb}%;background:var(--good)"></span></span>
+            <span class="val">${anb}%</span></div>
+          <div class="row"><span class="lab">Decided in the rush</span>
+            <span class="track"><span class="fill" style="width:${ab}%;background:var(--bad)"></span></span>
+            <span class="val">${ab}%</span></div>
+        </div>
+        <p class="basis" style="margin-top:14px">A
+        <strong style="color:var(--bad)">${(ab - anb).toFixed(1)} point</strong> difference.
+        Across all 18 boroughs: ${T.london.approval_not_bunched}% vs
+        ${T.london.approval_bunched}%.</p>
+      </div>`}
+
+      <p class="basis">Model: TF-IDF over 122,806 application descriptions plus borough and
+      application type. Tested on 28,073 later decisions it never saw &mdash; ROC-AUC
+      ${LM.metrics.roc_auc}. It is a guide, not a guarantee.</p>`;
+
+    wireToggle();          // the answer block is re-rendered each time, so re-bind
+  };
+
+  const wireToggle = () => {
+    const btn = $('#simbtn'), wrap = $('#simwrap');
+    if (!btn || !wrap) return;
+    btn.addEventListener('click', () => {
+      const open = !wrap.hidden;
+      wrap.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? btn.dataset.show : 'Hide';
+    });
+    btn.dataset.show = btn.textContent;
+  };
+  $('#b').addEventListener('change', () => { fillTypes(); draw(); });
+  $('#t').addEventListener('change', draw);
+  let deb; $('#q').addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(draw, 220); });
+  $('#b').value = 'Kingston'; fillTypes(); $('#t').value = 'Full';
+  $('#q').value = EXAMPLES[1]; draw();
+})();
+
+
+/* =================== MAP (standalone) + STATIC CHARTS =================== */
+(function () {
+  const KEYS = [['approval', 'Approval rate'], ['days', 'Decision time']];
+  let metric = 'approval', shown = null;
+  const byName = Object.fromEntries(MAP.features.map(f => [f.name, f]));
+
+  const card = f => {
+    const el = $('#mapcard');
+    if (!f) { el.innerHTML = ''; return; }
+    if (!f.in) {
+      const w = f.why || {};
+      const tag = { broken: 'Data quality flag', notarget: 'Not measurable',
+                    thin: 'Too few decisions', absent: 'Not collected' }[w.kind] || 'Excluded';
+      el.className = 'mapcard' + (w.kind === 'broken' ? ' flagged' : '');
+      const big = (w.headline || '').match(/[\d.,]+%?/);
+      const rest = big ? (w.headline || '').replace(big[0], '').trim() : (w.headline || '');
+      el.innerHTML = `<span class="flagtag">&#9888;&#65039; ${tag}</span>
+        <h3>${f.name}</h3>
+        ${big ? `<div class="flagbig">${big[0]}</div>` : ''}
+        <p class="flagsub">${rest}</p>
+        <p class="flagwhy">${w.detail || ''}</p>`;
+      return;
+    }
+    el.className = 'mapcard';
+    el.innerHTML = `<h3>${f.name}</h3>
+      <div class="mrow"><span>Decided on the deadline</span><b class="bad">${f.rush}%</b></div>
+      <div class="mrow"><span>Approved normally</span><b class="good">${f.app_norm}%</b></div>
+      <div class="mrow"><span>Approved in the rush</span><b class="bad">${f.app_rush}%</b></div>
+      <div class="mrow"><span>Typical decision</span><b>${f.days} days</b></div>
+      <div class="mrow"><span>Appeals lost</span><b>${f.appeal != null ? f.appeal + '%' : '—'}</b></div>
+      <div class="mrow"><span>Applications</span><b>${fmt(f.n)}</b></div>`;
+  };
+
+  const pick = (name) => { shown = name; card(byName[name]); drawMap(MAP, metric, pick, shown); };
+
+  const render = () => {
+    drawMap(MAP, metric, pick, shown);
+    const m = METRICS[metric];
+    $('#mapscale').innerHTML =
+      `<span>${m.legend[0]}</span>` +
+      [0, .17, .34, .5, .67, .84, 1].map(v => `<i style="background:${rampColor(v, m)}"></i>`).join('') +
+      `<span>${m.legend[1]}</span>` +
+      `<span class="nodata-key"><i style="background:var(--nodata)"></i>no data published</span>` +
+      `<span class="nodata-key"><i style="background:var(--flagfill);border:1px dashed var(--bad)"></i>data not credible</span>`;
+    $('#mapnote').textContent = m.note;
+  };
+  $('#mapseg').innerHTML = KEYS.map(([k, l]) =>
+    `<button class="seg" data-k="${k}" aria-pressed="${k === metric}">${l}</button>`).join('');
+  $('#mapseg').addEventListener('click', e => {
+    const b = e.target.closest('.seg'); if (!b) return;
+    metric = b.dataset.k;
+    [...$('#mapseg').children].forEach(c => c.setAttribute('aria-pressed', c === b));
+    render();
+  });
+  render();
+  pick('Southwark');          // show one borough on load, not an empty panel
+
+  // static, London-wide
+  const LB = PB.bunch.__LONDON__;
+  drawBunch(PB.offsets, LB);
+  // caption reads from the SAME record the chart draws, so the numbers can't diverge
+  const iz = PB.offsets.indexOf(0);
+  $('#cap-bunch').innerHTML =
+    `<span class="capnum bad">${fmt(LB.on_day)}</span> decisions land on the deadline, against a `
+    + `neighbouring-day average of <span class="capnum">${fmt(LB.counterfactual)}</span> — `
+    + `<span class="capnum bad">${LB.excess}×</span> more than expected. `
+    + `Day before: <span class="capnum">${fmt(LB.counts[iz - 1])}</span>. `
+    + `Day after: <span class="capnum">${fmt(LB.counts[iz + 1])}</span>.`;
+  drawSlope(APPR.bunch_approval_link, T.london, null,
+    Object.fromEntries(D.boroughs.map(b => [b.name, b.on_day_pct])));
+  drawTypes(PB.types.__LONDON__.rows, PB.types.__LONDON__.base, 'London');
+})();
+
+</script>

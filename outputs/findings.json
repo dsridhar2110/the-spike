@@ -1,0 +1,568 @@
+{
+ "meta": {
+  "total_decisions": 157455,
+  "n_boroughs": 18,
+  "boroughs_included": [
+   "Barking and Dagenham",
+   "Barnet",
+   "Bexley",
+   "Bromley",
+   "Croydon",
+   "Ealing",
+   "Islington",
+   "Kensington",
+   "Kingston",
+   "Lambeth",
+   "Lewisham",
+   "Merton",
+   "Redbridge",
+   "Richmond",
+   "Southwark",
+   "Sutton",
+   "Tower Hamlets",
+   "Waltham Forest"
+  ],
+  "boroughs_excluded": [
+   "Enfield",
+   "Hammersmith and Fulham",
+   "Haringey",
+   "Havering",
+   "Hillingdon",
+   "London Legacy",
+   "Old Oak Park Royal",
+   "Westminster"
+  ],
+  "date_from": "2018-01-01",
+  "date_to": "2026-02-25"
+ },
+ "headline": {
+  "on_day_n": 34051,
+  "on_day_pct": 21.6,
+  "counterfactual": 3336,
+  "excess_mass_x": 10.2,
+  "excess_n": 30715,
+  "day_before": 10825,
+  "day_after": 2329
+ },
+ "refusal_summary": {
+  "before": 21.2,
+  "on": 28.1,
+  "after": 17.0,
+  "n_before": 51794,
+  "n_on": 33227,
+  "n_after": 19812
+ },
+ "bunching": [
+  {
+   "d": -14,
+   "n": 2639
+  },
+  {
+   "d": -13,
+   "n": 1893
+  },
+  {
+   "d": -12,
+   "n": 1672
+  },
+  {
+   "d": -11,
+   "n": 1753
+  },
+  {
+   "d": -10,
+   "n": 1745
+  },
+  {
+   "d": -9,
+   "n": 1714
+  },
+  {
+   "d": -8,
+   "n": 2709
+  },
+  {
+   "d": -7,
+   "n": 5094
+  },
+  {
+   "d": -6,
+   "n": 4225
+  },
+  {
+   "d": -5,
+   "n": 4071
+  },
+  {
+   "d": -4,
+   "n": 4826
+  },
+  {
+   "d": -3,
+   "n": 5425
+  },
+  {
+   "d": -2,
+   "n": 5297
+  },
+  {
+   "d": -1,
+   "n": 10825
+  },
+  {
+   "d": 0,
+   "n": 34051
+  },
+  {
+   "d": 1,
+   "n": 2329
+  },
+  {
+   "d": 2,
+   "n": 1289
+  },
+  {
+   "d": 3,
+   "n": 1229
+  },
+  {
+   "d": 4,
+   "n": 1151
+  },
+  {
+   "d": 5,
+   "n": 961
+  },
+  {
+   "d": 6,
+   "n": 1165
+  },
+  {
+   "d": 7,
+   "n": 1550
+  },
+  {
+   "d": 8,
+   "n": 1226
+  },
+  {
+   "d": 9,
+   "n": 974
+  },
+  {
+   "d": 10,
+   "n": 1011
+  },
+  {
+   "d": 11,
+   "n": 1108
+  },
+  {
+   "d": 12,
+   "n": 984
+  },
+  {
+   "d": 13,
+   "n": 1646
+  },
+  {
+   "d": 14,
+   "n": 3946
+  }
+ ],
+ "refusal_by_offset": [
+  {
+   "d": -14,
+   "approved": 2061,
+   "refused": 487,
+   "rate": 19.11
+  },
+  {
+   "d": -13,
+   "approved": 1475,
+   "refused": 301,
+   "rate": 16.95
+  },
+  {
+   "d": -12,
+   "approved": 1312,
+   "refused": 284,
+   "rate": 17.79
+  },
+  {
+   "d": -11,
+   "approved": 1388,
+   "refused": 297,
+   "rate": 17.63
+  },
+  {
+   "d": -10,
+   "approved": 1334,
+   "refused": 325,
+   "rate": 19.59
+  },
+  {
+   "d": -9,
+   "approved": 1275,
+   "refused": 348,
+   "rate": 21.44
+  },
+  {
+   "d": -8,
+   "approved": 2046,
+   "refused": 531,
+   "rate": 20.61
+  },
+  {
+   "d": -7,
+   "approved": 3654,
+   "refused": 1229,
+   "rate": 25.17
+  },
+  {
+   "d": -6,
+   "approved": 3304,
+   "refused": 744,
+   "rate": 18.38
+  },
+  {
+   "d": -5,
+   "approved": 3179,
+   "refused": 749,
+   "rate": 19.07
+  },
+  {
+   "d": -4,
+   "approved": 3688,
+   "refused": 962,
+   "rate": 20.69
+  },
+  {
+   "d": -3,
+   "approved": 4092,
+   "refused": 1154,
+   "rate": 22.0
+  },
+  {
+   "d": -2,
+   "approved": 4037,
+   "refused": 1062,
+   "rate": 20.83
+  },
+  {
+   "d": -1,
+   "approved": 7992,
+   "refused": 2484,
+   "rate": 23.71
+  },
+  {
+   "d": 0,
+   "approved": 23878,
+   "refused": 9349,
+   "rate": 28.14
+  },
+  {
+   "d": 1,
+   "approved": 1750,
+   "refused": 446,
+   "rate": 20.31
+  },
+  {
+   "d": 2,
+   "approved": 1009,
+   "refused": 223,
+   "rate": 18.1
+  },
+  {
+   "d": 3,
+   "approved": 968,
+   "refused": 184,
+   "rate": 15.97
+  },
+  {
+   "d": 4,
+   "approved": 903,
+   "refused": 191,
+   "rate": 17.46
+  },
+  {
+   "d": 5,
+   "approved": 791,
+   "refused": 128,
+   "rate": 13.93
+  },
+  {
+   "d": 6,
+   "approved": 955,
+   "refused": 164,
+   "rate": 14.66
+  },
+  {
+   "d": 7,
+   "approved": 1226,
+   "refused": 257,
+   "rate": 17.33
+  },
+  {
+   "d": 8,
+   "approved": 992,
+   "refused": 170,
+   "rate": 14.63
+  },
+  {
+   "d": 9,
+   "approved": 790,
+   "refused": 154,
+   "rate": 16.31
+  },
+  {
+   "d": 10,
+   "approved": 823,
+   "refused": 155,
+   "rate": 15.85
+  },
+  {
+   "d": 11,
+   "approved": 920,
+   "refused": 159,
+   "rate": 14.74
+  },
+  {
+   "d": 12,
+   "approved": 810,
+   "refused": 154,
+   "rate": 15.98
+  },
+  {
+   "d": 13,
+   "approved": 1326,
+   "refused": 269,
+   "rate": 16.87
+  },
+  {
+   "d": 14,
+   "approved": 3174,
+   "refused": 721,
+   "rate": 18.51
+  }
+ ],
+ "boroughs": [
+  {
+   "name": "Kingston",
+   "n": 14093,
+   "on_day_pct": 38.9,
+   "refusal_pct": 24.8
+  },
+  {
+   "name": "Lewisham",
+   "n": 9729,
+   "on_day_pct": 31.5,
+   "refusal_pct": 23.7
+  },
+  {
+   "name": "Bexley",
+   "n": 12011,
+   "on_day_pct": 31.1,
+   "refusal_pct": 16.5
+  },
+  {
+   "name": "Waltham Forest",
+   "n": 4329,
+   "on_day_pct": 27.1,
+   "refusal_pct": 25.4
+  },
+  {
+   "name": "Barking and Dagenham",
+   "n": 2467,
+   "on_day_pct": 27.1,
+   "refusal_pct": 26.8
+  },
+  {
+   "name": "Tower Hamlets",
+   "n": 3680,
+   "on_day_pct": 23.9,
+   "refusal_pct": 21.2
+  },
+  {
+   "name": "Sutton",
+   "n": 9770,
+   "on_day_pct": 23.7,
+   "refusal_pct": 23.2
+  },
+  {
+   "name": "Lambeth",
+   "n": 13899,
+   "on_day_pct": 23.1,
+   "refusal_pct": 20.9
+  },
+  {
+   "name": "Islington",
+   "n": 3825,
+   "on_day_pct": 23.0,
+   "refusal_pct": 23.2
+  },
+  {
+   "name": "Barnet",
+   "n": 22199,
+   "on_day_pct": 21.9,
+   "refusal_pct": 24.9
+  },
+  {
+   "name": "Kensington",
+   "n": 4132,
+   "on_day_pct": 21.7,
+   "refusal_pct": 9.5
+  },
+  {
+   "name": "Bromley",
+   "n": 1553,
+   "on_day_pct": 20.8,
+   "refusal_pct": 21.7
+  },
+  {
+   "name": "Redbridge",
+   "n": 17162,
+   "on_day_pct": 20.2,
+   "refusal_pct": 19.9
+  },
+  {
+   "name": "Ealing",
+   "n": 1803,
+   "on_day_pct": 13.9,
+   "refusal_pct": 14.6
+  },
+  {
+   "name": "Croydon",
+   "n": 1590,
+   "on_day_pct": 12.9,
+   "refusal_pct": 21.2
+  },
+  {
+   "name": "Southwark",
+   "n": 8470,
+   "on_day_pct": 12.3,
+   "refusal_pct": 8.1
+  },
+  {
+   "name": "Richmond",
+   "n": 11619,
+   "on_day_pct": 11.4,
+   "refusal_pct": 19.3
+  },
+  {
+   "name": "Merton",
+   "n": 15124,
+   "on_day_pct": 1.6,
+   "refusal_pct": 14.0
+  }
+ ],
+ "years": [
+  {
+   "year": "2018",
+   "pct": 25.9,
+   "n": 28748
+  },
+  {
+   "year": "2019",
+   "pct": 23.3,
+   "n": 22429
+  },
+  {
+   "year": "2020",
+   "pct": 20.7,
+   "n": 21143
+  },
+  {
+   "year": "2021",
+   "pct": 19.7,
+   "n": 21862
+  },
+  {
+   "year": "2022",
+   "pct": 20.3,
+   "n": 18671
+  },
+  {
+   "year": "2023",
+   "pct": 21.5,
+   "n": 15634
+  },
+  {
+   "year": "2024",
+   "pct": 19.2,
+   "n": 13431
+  },
+  {
+   "year": "2025",
+   "pct": 19.3,
+   "n": 15252
+  }
+ ],
+ "appeals": [
+  {
+   "name": "Barnet",
+   "overturn_pct": 41.6,
+   "n": 861
+  },
+  {
+   "name": "Richmond",
+   "overturn_pct": 38.7,
+   "n": 243
+  },
+  {
+   "name": "Redbridge",
+   "overturn_pct": 36.8,
+   "n": 223
+  },
+  {
+   "name": "Kingston",
+   "overturn_pct": 35.3,
+   "n": 467
+  },
+  {
+   "name": "Waltham Forest",
+   "overturn_pct": 34.3,
+   "n": 172
+  },
+  {
+   "name": "Bexley",
+   "overturn_pct": 32.0,
+   "n": 334
+  },
+  {
+   "name": "Merton",
+   "overturn_pct": 30.9,
+   "n": 343
+  },
+  {
+   "name": "Sutton",
+   "overturn_pct": 30.0,
+   "n": 337
+  },
+  {
+   "name": "Lambeth",
+   "overturn_pct": 29.3,
+   "n": 556
+  },
+  {
+   "name": "Lewisham",
+   "overturn_pct": 26.0,
+   "n": 404
+  },
+  {
+   "name": "Islington",
+   "overturn_pct": 24.4,
+   "n": 409
+  },
+  {
+   "name": "Tower Hamlets",
+   "overturn_pct": 22.8,
+   "n": 250
+  },
+  {
+   "name": "Barking and Dagenham",
+   "overturn_pct": 22.7,
+   "n": 203
+  }
+ ]
+}

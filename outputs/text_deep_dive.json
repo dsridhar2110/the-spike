@@ -1,0 +1,263 @@
+{
+ "archetypes": [
+  {
+   "type": "Single storey rear extension",
+   "n": 44454,
+   "approval": 77.7,
+   "vs_base": -2.1,
+   "median_days": 51
+  },
+  {
+   "type": "Single storey extension (any)",
+   "n": 64349,
+   "approval": 79.5,
+   "vs_base": -0.4,
+   "median_days": 55
+  },
+  {
+   "type": "Two storey extension",
+   "n": 12897,
+   "approval": 73.3,
+   "vs_base": -6.5,
+   "median_days": 61
+  },
+  {
+   "type": "Loft conversion / dormer",
+   "n": 40480,
+   "approval": 81.8,
+   "vs_base": 2.0,
+   "median_days": 56
+  },
+  {
+   "type": "Rooflights / skylights only",
+   "n": 40144,
+   "approval": 84.1,
+   "vs_base": 4.2,
+   "median_days": 56
+  },
+  {
+   "type": "Conversion into flats",
+   "n": 3812,
+   "approval": 65.7,
+   "vs_base": -14.2,
+   "median_days": 68
+  },
+  {
+   "type": "Erection of new dwelling(s)",
+   "n": 9803,
+   "approval": 72.2,
+   "vs_base": -7.7,
+   "median_days": 56
+  },
+  {
+   "type": "Change of use",
+   "n": 10152,
+   "approval": 67.6,
+   "vs_base": -12.2,
+   "median_days": 61
+  },
+  {
+   "type": "Demolition involved",
+   "n": 26809,
+   "approval": 82.5,
+   "vs_base": 2.6,
+   "median_days": 58
+  },
+  {
+   "type": "Basement / excavation",
+   "n": 6212,
+   "approval": 84.0,
+   "vs_base": 4.2,
+   "median_days": 62
+  },
+  {
+   "type": "Outbuilding / garage / shed",
+   "n": 15936,
+   "approval": 78.5,
+   "vs_base": -1.3,
+   "median_days": 58
+  },
+  {
+   "type": "Additional storey(s) on top",
+   "n": 24084,
+   "approval": 81.3,
+   "vs_base": 1.4,
+   "median_days": 56
+  },
+  {
+   "type": "Trees / hedge works",
+   "n": 3521,
+   "approval": 85.3,
+   "vs_base": 5.5,
+   "median_days": 56
+  }
+ ],
+ "storeys": [
+  {
+   "storeys": "single storey",
+   "n": 67252,
+   "approval": 79.5
+  },
+  {
+   "storeys": "two storey",
+   "n": 12720,
+   "approval": 73.0
+  },
+  {
+   "storeys": "three storey",
+   "n": 1462,
+   "approval": 73.5
+  },
+  {
+   "storeys": "four+ storey",
+   "n": 1454,
+   "approval": 85.3
+  },
+  {
+   "storeys": "not stated",
+   "n": 66934,
+   "approval": 81.6
+  }
+ ],
+ "metrics": {
+  "roc_auc": 0.7103,
+  "pr_auc_approval": 0.9049,
+  "pr_auc_refusal": 0.3759,
+  "brier": 0.1395,
+  "base_approval": 0.8103,
+  "n_train": 121795,
+  "n_test": 28027,
+  "max_calibration_error": 0.06
+ },
+ "thresholds": [
+  {
+   "threshold": 0.4,
+   "flagged": 489,
+   "precision": 0.6258,
+   "recall": 0.0576,
+   "f1": 0.1054
+  },
+  {
+   "threshold": 0.5,
+   "flagged": 1291,
+   "precision": 0.5136,
+   "recall": 0.1247,
+   "f1": 0.2007
+  },
+  {
+   "threshold": 0.6,
+   "flagged": 2814,
+   "precision": 0.4517,
+   "recall": 0.2391,
+   "f1": 0.3127
+  },
+  {
+   "threshold": 0.65,
+   "flagged": 4095,
+   "precision": 0.421,
+   "recall": 0.3243,
+   "f1": 0.3664
+  },
+  {
+   "threshold": 0.7,
+   "flagged": 5883,
+   "precision": 0.3825,
+   "recall": 0.4233,
+   "f1": 0.4018
+  }
+ ],
+ "calibration": [
+  {
+   "pred": 0.487,
+   "actual": 0.547,
+   "n": 2803
+  },
+  {
+   "pred": 0.651,
+   "actual": 0.68,
+   "n": 2803
+  },
+  {
+   "pred": 0.727,
+   "actual": 0.747,
+   "n": 2802
+  },
+  {
+   "pred": 0.782,
+   "actual": 0.791,
+   "n": 2803
+  },
+  {
+   "pred": 0.824,
+   "actual": 0.821,
+   "n": 2803
+  },
+  {
+   "pred": 0.856,
+   "actual": 0.873,
+   "n": 2803
+  },
+  {
+   "pred": 0.876,
+   "actual": 0.894,
+   "n": 2803
+  },
+  {
+   "pred": 0.896,
+   "actual": 0.884,
+   "n": 2801
+  },
+  {
+   "pred": 0.922,
+   "actual": 0.915,
+   "n": 2803
+  },
+  {
+   "pred": 0.964,
+   "actual": 0.953,
+   "n": 2803
+  }
+ ],
+ "walk_forward": [
+  {
+   "train_through": 2020,
+   "test_year": 2021,
+   "n": 20914,
+   "roc": 0.7033,
+   "refusal_pr": 0.3821,
+   "base_refusal": 0.1995
+  },
+  {
+   "train_through": 2021,
+   "test_year": 2022,
+   "n": 17903,
+   "roc": 0.6971,
+   "refusal_pr": 0.3766,
+   "base_refusal": 0.1925
+  },
+  {
+   "train_through": 2022,
+   "test_year": 2023,
+   "n": 14993,
+   "roc": 0.7119,
+   "refusal_pr": 0.4007,
+   "base_refusal": 0.2103
+  },
+  {
+   "train_through": 2023,
+   "test_year": 2024,
+   "n": 12895,
+   "roc": 0.7139,
+   "refusal_pr": 0.3939,
+   "base_refusal": 0.1993
+  },
+  {
+   "train_through": 2024,
+   "test_year": 2025,
+   "n": 14850,
+   "roc": 0.7164,
+   "refusal_pr": 0.3778,
+   "base_refusal": 0.1832
+  }
+ ]
+}

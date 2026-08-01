@@ -1,0 +1,191 @@
+{
+ "parity": {
+  "lgbm_pr_auc": 0.3375,
+  "lgbm_roc_auc": 0.7034,
+  "sklearn_pr_auc": 0.3393
+ },
+ "global_mean_abs_shap": [
+  {
+   "feature": "borough_prior",
+   "mean_abs_shap": 0.49845
+  },
+  {
+   "feature": "app_type",
+   "mean_abs_shap": 0.29908
+  },
+  {
+   "feature": "ward_top",
+   "mean_abs_shap": 0.20456
+  },
+  {
+   "feature": "area_name",
+   "mean_abs_shap": 0.13722
+  },
+  {
+   "feature": "sub_year",
+   "mean_abs_shap": 0.09122
+  },
+  {
+   "feature": "sub_month",
+   "mean_abs_shap": 0.08295
+  },
+  {
+   "feature": "sub_dow",
+   "mean_abs_shap": 0.06807
+  },
+  {
+   "feature": "desc_len",
+   "mean_abs_shap": 0.06622
+  },
+  {
+   "feature": "weekly_intake",
+   "mean_abs_shap": 0.05799
+  },
+  {
+   "feature": "desc_words",
+   "mean_abs_shap": 0.05452
+  },
+  {
+   "feature": "has_agent",
+   "mean_abs_shap": 0.0169
+  },
+  {
+   "feature": "has_geo",
+   "mean_abs_shap": 0.00181
+  }
+ ],
+ "borough_direction": [
+  {
+   "borough": "Kingston",
+   "mean_shap": 0.3173,
+   "n": 357
+  },
+  {
+   "borough": "Lewisham",
+   "mean_shap": 0.2212,
+   "n": 258
+  },
+  {
+   "borough": "Islington",
+   "mean_shap": 0.1047,
+   "n": 120
+  },
+  {
+   "borough": "Bexley",
+   "mean_shap": 0.0887,
+   "n": 222
+  },
+  {
+   "borough": "Kensington",
+   "mean_shap": 0.066,
+   "n": 142
+  },
+  {
+   "borough": "Tower Hamlets",
+   "mean_shap": 0.059,
+   "n": 90
+  },
+  {
+   "borough": "Lambeth",
+   "mean_shap": 0.0265,
+   "n": 452
+  },
+  {
+   "borough": "Barnet",
+   "mean_shap": -0.0566,
+   "n": 632
+  },
+  {
+   "borough": "Redbridge",
+   "mean_shap": -0.084,
+   "n": 517
+  },
+  {
+   "borough": "Croydon",
+   "mean_shap": -0.1049,
+   "n": 259
+  },
+  {
+   "borough": "Ealing",
+   "mean_shap": -0.1054,
+   "n": 314
+  },
+  {
+   "borough": "Bromley",
+   "mean_shap": -0.1112,
+   "n": 285
+  },
+  {
+   "borough": "Merton",
+   "mean_shap": -0.1525,
+   "n": 478
+  },
+  {
+   "borough": "Richmond",
+   "mean_shap": -0.1743,
+   "n": 368
+  },
+  {
+   "borough": "Sutton",
+   "mean_shap": -0.1997,
+   "n": 259
+  },
+  {
+   "borough": "Southwark",
+   "mean_shap": -0.2358,
+   "n": 247
+  }
+ ],
+ "app_type_direction": [
+  {
+   "app_type": "Full",
+   "mean_shap": 0.3049,
+   "n": 2503
+  },
+  {
+   "app_type": "Advertising",
+   "mean_shap": 0.1134,
+   "n": 1
+  },
+  {
+   "app_type": "Telecoms",
+   "mean_shap": 0.0792,
+   "n": 1
+  },
+  {
+   "app_type": "Heritage",
+   "mean_shap": 0.0255,
+   "n": 31
+  },
+  {
+   "app_type": "MISSING",
+   "mean_shap": 0.0142,
+   "n": 36
+  },
+  {
+   "app_type": "Other",
+   "mean_shap": 0.0135,
+   "n": 6
+  },
+  {
+   "app_type": "Amendment",
+   "mean_shap": -0.0622,
+   "n": 250
+  },
+  {
+   "app_type": "Outline",
+   "mean_shap": -0.2917,
+   "n": 1631
+  },
+  {
+   "app_type": "Conditions",
+   "mean_shap": -0.4027,
+   "n": 534
+  },
+  {
+   "app_type": "Trees",
+   "mean_shap": -1.4449,
+   "n": 7
+  }
+ ]
+}

@@ -1,0 +1,175 @@
+{
+ "n_rows": 157455,
+ "n_boroughs": 18,
+ "base_rate_test": 0.1922,
+ "results": {
+  "baseline_borough_rate": {
+   "pr_auc": 0.3012,
+   "roc_auc": 0.6685,
+   "brier": 0.1474
+  },
+  "logistic_regression": {
+   "pr_auc": 0.3295,
+   "roc_auc": 0.684,
+   "brier": 0.1448
+  },
+  "hist_gradient_boosting": {
+   "pr_auc": 0.3393,
+   "roc_auc": 0.7017,
+   "brier": 0.1437
+  }
+ },
+ "lift_vs_baseline": 1.126,
+ "precision_at_10pct": 0.4215,
+ "calibration": [
+  {
+   "bin": 0,
+   "pred": 0.019,
+   "actual": 0.025,
+   "n": 2869
+  },
+  {
+   "bin": 1,
+   "pred": 0.071,
+   "actual": 0.082,
+   "n": 2868
+  },
+  {
+   "bin": 2,
+   "pred": 0.109,
+   "actual": 0.11,
+   "n": 2868
+  },
+  {
+   "bin": 3,
+   "pred": 0.144,
+   "actual": 0.135,
+   "n": 2868
+  },
+  {
+   "bin": 4,
+   "pred": 0.182,
+   "actual": 0.163,
+   "n": 2869
+  },
+  {
+   "bin": 5,
+   "pred": 0.223,
+   "actual": 0.192,
+   "n": 2868
+  },
+  {
+   "bin": 6,
+   "pred": 0.255,
+   "actual": 0.23,
+   "n": 2868
+  },
+  {
+   "bin": 7,
+   "pred": 0.286,
+   "actual": 0.248,
+   "n": 2868
+  },
+  {
+   "bin": 8,
+   "pred": 0.325,
+   "actual": 0.314,
+   "n": 2868
+  },
+  {
+   "bin": 9,
+   "pred": 0.464,
+   "actual": 0.422,
+   "n": 2869
+  }
+ ],
+ "walk_forward": [
+  {
+   "train_through": 2021,
+   "test_year": 2022,
+   "n": 18671,
+   "base_rate": 0.203,
+   "baseline_pr": 0.2999,
+   "hgb_pr": 0.3144,
+   "lift": 1.048
+  },
+  {
+   "train_through": 2022,
+   "test_year": 2023,
+   "n": 15634,
+   "base_rate": 0.215,
+   "baseline_pr": 0.3284,
+   "hgb_pr": 0.3675,
+   "lift": 1.119
+  },
+  {
+   "train_through": 2023,
+   "test_year": 2024,
+   "n": 13431,
+   "base_rate": 0.1916,
+   "baseline_pr": 0.3134,
+   "hgb_pr": 0.3706,
+   "lift": 1.182
+  },
+  {
+   "train_through": 2024,
+   "test_year": 2025,
+   "n": 15252,
+   "base_rate": 0.1926,
+   "baseline_pr": 0.2926,
+   "hgb_pr": 0.3204,
+   "lift": 1.095
+  }
+ ],
+ "permutation_importance": [
+  {
+   "feature": "area_name",
+   "drop_in_pr_auc": 0.09023
+  },
+  {
+   "feature": "app_type",
+   "drop_in_pr_auc": 0.04878
+  },
+  {
+   "feature": "ward_top",
+   "drop_in_pr_auc": 0.03476
+  },
+  {
+   "feature": "desc_len",
+   "drop_in_pr_auc": 0.0045
+  },
+  {
+   "feature": "sub_dow",
+   "drop_in_pr_auc": 0.0028
+  },
+  {
+   "feature": "weekly_intake",
+   "drop_in_pr_auc": 0.0022
+  },
+  {
+   "feature": "has_agent",
+   "drop_in_pr_auc": 0.00129
+  },
+  {
+   "feature": "desc_words",
+   "drop_in_pr_auc": 0.00019
+  },
+  {
+   "feature": "borough_prior",
+   "drop_in_pr_auc": 1e-05
+  },
+  {
+   "feature": "sub_year",
+   "drop_in_pr_auc": 0.0
+  },
+  {
+   "feature": "has_geo",
+   "drop_in_pr_auc": -2e-05
+  },
+  {
+   "feature": "sub_month",
+   "drop_in_pr_auc": -0.00145
+  }
+ ],
+ "shap_mean_abs": []
+}

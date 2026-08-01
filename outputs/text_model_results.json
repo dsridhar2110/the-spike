@@ -1,0 +1,210 @@
+{
+ "ladder": [
+  {
+   "step": "borough only",
+   "roc": 0.5619,
+   "refusal_pr": 0.214
+  },
+  {
+   "step": "+ type, ward, timing",
+   "roc": 0.5762,
+   "refusal_pr": 0.2251
+  },
+  {
+   "step": "+ TF-IDF description",
+   "roc": 0.711,
+   "refusal_pr": 0.3752
+  },
+  {
+   "step": "text alone",
+   "roc": 0.7023,
+   "refusal_pr": 0.3644
+  }
+ ],
+ "refusal_words": [
+  {
+   "word": "two storey",
+   "coef": -0.6457
+  },
+  {
+   "word": "height of",
+   "coef": -0.6042
+  },
+  {
+   "word": "two",
+   "coef": -0.4872
+  },
+  {
+   "word": "of first",
+   "coef": -0.4707
+  },
+  {
+   "word": "bedroom",
+   "coef": -0.4469
+  },
+  {
+   "word": "flats",
+   "coef": -0.4244
+  },
+  {
+   "word": "of two",
+   "coef": -0.4147
+  },
+  {
+   "word": "dwelling",
+   "coef": -0.3963
+  },
+  {
+   "word": "from",
+   "coef": -0.3784
+  },
+  {
+   "word": "eaves height",
+   "coef": -0.3658
+  },
+  {
+   "word": "self contained",
+   "coef": -0.3405
+  },
+  {
+   "word": "contained",
+   "coef": -0.3398
+  },
+  {
+   "word": "self",
+   "coef": -0.3388
+  },
+  {
+   "word": "proposed depth",
+   "coef": -0.3159
+  },
+  {
+   "word": "height",
+   "coef": -0.3135
+  },
+  {
+   "word": "with proposed",
+   "coef": -0.3
+  },
+  {
+   "word": "first",
+   "coef": -0.2963
+  },
+  {
+   "word": "depth of",
+   "coef": -0.2864
+  },
+  {
+   "word": "depth",
+   "coef": -0.2829
+  },
+  {
+   "word": "change",
+   "coef": -0.2767
+  },
+  {
+   "word": "of use",
+   "coef": -0.2735
+  },
+  {
+   "word": "change of",
+   "coef": -0.2728
+  },
+  {
+   "word": "of part",
+   "coef": -0.271
+  },
+  {
+   "word": "residential",
+   "coef": -0.2647
+  },
+  {
+   "word": "first floor",
+   "coef": -0.2642
+  }
+ ],
+ "approval_words": [
+  {
+   "word": "of single",
+   "coef": 0.6551
+  },
+  {
+   "word": "single storey",
+   "coef": 0.4883
+  },
+  {
+   "word": "single",
+   "coef": 0.4507
+  },
+  {
+   "word": "lights",
+   "coef": 0.3324
+  },
+  {
+   "word": "ground floor",
+   "coef": 0.3287
+  },
+  {
+   "word": "roof lights",
+   "coef": 0.3279
+  },
+  {
+   "word": "rear",
+   "coef": 0.3236
+  },
+  {
+   "word": "storey ground",
+   "coef": 0.3043
+  },
+  {
+   "word": "ground",
+   "coef": 0.295
+  },
+  {
+   "word": "rooflights",
+   "coef": 0.285
+  },
+  {
+   "word": "prune",
+   "coef": 0.2657
+  },
+  {
+   "word": "front roof",
+   "coef": 0.2635
+  },
+  {
+   "word": "side and",
+   "coef": 0.256
+  },
+  {
+   "word": "amended",
+   "coef": 0.2541
+  },
+  {
+   "word": "lights summary",
+   "coef": 0.2438
+  },
+  {
+   "word": "condition",
+   "coef": 0.2381
+  },
+  {
+   "word": "replacement",
+   "coef": 0.2267
+  },
+  {
+   "word": "proposed single",
+   "coef": 0.2117
+  },
+  {
+   "word": "rooflights to",
+   "coef": 0.2111
+  },
+  {
+   "word": "window",
+   "coef": 0.2075
+  }
+ ],
+ "top_decile_refusal_rate": 0.4624,
+ "base_refusal_rate": 0.1895
+}
