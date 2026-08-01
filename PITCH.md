@@ -100,12 +100,20 @@
 
 ---
 
-## 2:55 — Close *(15s)*
+## 2:55 — Close *(30s)*
 
-> "The 8-week target was meant to stop councils sitting on applications. It's become
-> something they manage *to*.
+> "So &mdash; one last number.
 >
-> **Measure decisions that survive appeal — not decisions issued inside 8 weeks.**"
+> Over eight years, in these eighteen boroughs, **17,600** applications asked to create new
+> households. **5,600** of them were refused.
+>
+> Judged the way a basement or a loft conversion is judged, **2,300 of those refusals
+> wouldn't have happened.**
+>
+> London is not short of people asking to build homes. It's short of a system that says
+> yes to them.
+>
+> **Measure decisions that survive appeal &mdash; not decisions issued inside 8 weeks.**"
 
 ---
 
@@ -140,6 +148,7 @@
 | Southwark / Barking | **92%** / **73%** approval |
 | Redbridge / Bromley | **45** / **63** days |
 | Building changes vs density changes | **81.0%** / **68.1%** — a **12.9**-point gap |
+| Home-creating applications | **17,641** filed · **~5,634** refused · **~2,283** more than the 81% rate would give |
 | Rooflights / flats conversion | **84.1%** / **66.1%** vs **79.9%** average |
 | Classifier | ROC-AUC **0.7103**, 122k train / 28k test |
 
@@ -168,6 +177,12 @@
 > extensions at 74%, still beats the *highest* density category, new dwellings at 71%.
 > A basement is a bigger physical intervention than splitting a house, and it's approved
 > 18 points more often."
+
+**"Does a refusal mean a home was lost?"**
+> "No, and we're not claiming that — plenty of refusals come back amended and get through.
+> What we can say is that applications creating new households are refused at 32% against
+> 19% for everything else. The 2,300 is the gap between those two rates, not a count of
+> lost homes."
 
 **"Where's the data from?"**
 > "343,000 London applications from UK PlanIt, scraped and filtered by Jamie who runs this
