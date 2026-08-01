@@ -57,8 +57,9 @@
 
 > "And it costs you. **Kensington** normally approves **93%**. In that rush, **83%**.
 >
-> **Waltham Forest** is the exception — flat, no penalty. But it's one of only two.
-> **Sixteen of eighteen** approve less against the clock. London-wide, **82% to 72%**."
+> **Barking and Dagenham** goes the other way — **72% up to 76%**. But it's one of only
+> two. **Sixteen of eighteen** approve less against the clock. London-wide, **82% to
+> 72%**."
 
 ---
 
@@ -136,7 +137,8 @@
 | Neighbouring day | ~**3,200** |
 | Approved normally → in the rush | **82.1% → 71.9%** · **16 of 18** boroughs |
 | Kensington | 93% → 83% (**−9.9**) |
-| Waltham Forest | 75% → 75% (**+0.4**) — the exception |
+| Barking and Dagenham | 72% → 76% (**+3.4**) — the exception |
+| Waltham Forest | 75% → 75% (**+0.4**) — the other one |
 | Southwark / Barking | **92%** / **73%** approval |
 | Redbridge / Bromley | **45** / **63** days |
 | Rooflights / flats conversion | **84.1%** / **66.1%** vs **79.9%** average |
