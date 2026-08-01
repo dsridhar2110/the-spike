@@ -74,9 +74,13 @@
 > **feature extraction** across all **122,000** of them — TF-IDF over **9,343** words and
 > phrases. No categories, no labels, no domain rules. Just the text.
 >
-> And it recovered the structure on its own. **Rooflights, 84% approved. Basements, 84%.**
-> Then it falls — **new dwelling 71%, change of use 68%, converting a house into flats
-> 66%.** Fourteen points below the London average.
+> And a clean split falls out. Everything above average changes the **building** —
+> rooflights, basements, loft conversions. Everything below it changes what the building
+> *is*, or how many households it holds — change of use, new dwellings, splitting a house
+> into flats.
+>
+> **81% against 68%.** Digging out an entire basement is fine. Turning one house into three
+> flats is not. **The system is far more tolerant of size than of density.**
 >
 > Nobody told this model what a loft conversion is. **It learned the size of the ask from
 > the words alone.**"
@@ -139,6 +143,7 @@
 | Waltham Forest | 75% → 75% (**+0.4**) — the other one |
 | Southwark / Barking | **92%** / **73%** approval |
 | Redbridge / Bromley | **45** / **63** days |
+| Building changes vs density changes | **81.0%** / **68.1%** — a **12.9**-point gap |
 | Rooflights / flats conversion | **84.1%** / **66.1%** vs **79.9%** average |
 | Classifier | ROC-AUC **0.7103**, 122k train / 28k test |
 
@@ -161,6 +166,12 @@
 **"Why only 18 boroughs?"**
 > "Five publish no target decision date at all. We dropped eight more on data quality —
 > Havering records a 0.0% refusal rate, which isn't credible. All named on the map."
+
+**"Isn't the size/density split just a size effect?"**
+> "It isn't — the separation is clean. The *lowest* building-change category, two-storey
+> extensions at 74%, still beats the *highest* density category, new dwellings at 71%.
+> A basement is a bigger physical intervention than splitting a house, and it's approved
+> 18 points more often."
 
 **"Where's the data from?"**
 > "343,000 London applications from UK PlanIt, scraped and filtered by Jamie who runs this
