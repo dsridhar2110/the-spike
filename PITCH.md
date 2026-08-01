@@ -1,112 +1,135 @@
-# SPIKE Girls SB — 3-minute pitch
+# The Spike — 3-minute pitch
 
-**House London #0 · Data Brief DD · 1 August 2026**
+**Spike Girls SB · House London #0 · Data Brief DD**
 
-> **Structure:** make it personal → show the spike → show the cost → show it's a choice →
-> show you tried to break it → make the ask.
->
-> **Do not say** "PR-AUC", "ROC-AUC", "gradient boosting", or "classifier" out loud. The
-> model lives on the page for anyone who asks. Your rigour signal is the six checks.
+> **Two people.** One speaks, one drives the page. Cues in `[brackets]` are for the driver.
+> **Never read a heading aloud** — the room can see it. Say the thing the heading doesn't.
+> **Total ≈ 430 words.** At a calm 145 wpm that is 3:00 with nothing to spare.
 
 ---
 
-## The opener — use the team name *(15s)*
+## 0:00 — Open *(20s)*
 
-> "We're the **Spike Girls**. So we went looking for a spike.
+`[page at the top]`
+
+> "We're the **Spike Girls**. We went looking for a spike in London's planning data.
+> We found one.
 >
-> We found one."
-
-*Beat. Then straight into the tool.*
+> Councils have **8 weeks** to decide a planning application, and the government scores
+> them on hitting it. We took **150,000 real decisions** across **18 boroughs** and
+> **8 years**, and asked a simple question: *when* do those decisions actually happen?"
 
 ---
 
-## 0:15 — Make it personal *(30s)*
+## 0:20 — The map *(30s)*
 
-**Have the page open. Ask the room.**
+`[scroll to the map — Approval rate is already selected]`
 
-> "Who here has applied for planning permission? Or lives in a London borough — shout one
-> out."
-
-*Pick it in the dropdown. Ideally* **Sutton**, **Richmond**, **Islington** *or*
-**Tower Hamlets** *— biggest effects. Read what appears.*
-
-> "Right — Richmond. Of 11,019 applications since 2018, 82% were approved. Typical
-> decision, 55 days.
+> "First, where you apply matters. In **Southwark**, **92%** of applications are approved.
+> In **Barking and Dagenham**, **73%**. Nineteen points, same city, same law.
 >
-> But look at this one. **11% of them were decided on the exact final day of the legal
-> deadline.** And when that happens, approval drops from **82% to 66%**."
+> `[click Decision time]`
+>
+> And how long it takes swings too — **Redbridge** decides in **45 days**, **Bromley**
+> takes **63**.
+>
+> But look how tightly the middle clusters. Almost every borough lands in the same narrow
+> band. That looked boring to us — until we asked *why*."
 
 ---
 
-## 0:45 — The spike *(40s)*
+## 0:50 — The spike *(30s)*
 
-> "Here's why that number exists.
->
-> Councils get 8 weeks to decide. The government judges them on hitting it. The average
-> decision in London takes **56 days** — and the legal limit is **56 days**. Exactly.
->
-> Real work doesn't land on round numbers. So we plotted every decision by how close to
-> the deadline it landed."
+`[scroll to the spike chart — pause two seconds before speaking]`
 
-**Show the chart. Say nothing for two seconds.**
-
-> "**One in five lands on precisely the last day.** Ten times what the surrounding days
-> predict.
+> "This is every decision, plotted by how close it landed to the deadline the council set
+> itself.
 >
-> Day before: **10,825**. On the day: **34,051**. Day after: **2,329**.
+> **The single most common day to decide a planning application in London is the last
+> legal one.** **33,000** decisions land there — **one in five of everything** — against
+> about **3,200** on any neighbouring day. **Ten times** what you'd expect.
 >
-> Councils aren't deciding faster. They're holding applications and clearing them at the
-> deadline."
+> Councils aren't deciding faster. They're holding applications and clearing them at
+> the buzzer."
 
 ---
 
-## 1:25 — What it costs *(35s)*
+## 1:20 — What it costs *(25s)*
 
-> "And it isn't harmless. Across all 18 boroughs, applications decided in that rush are
-> approved **71.9%** of the time. Everything else — **82.1%**. **Ten points.**
+`[scroll to the 16-of-18 chart]`
+
+> "And it costs you. Take **Kensington** — normally **93%** of applications are approved
+> there. Decided in that rush, **83%**. Ten points gone.
 >
-> **Sixteen of eighteen boroughs** show it.
->
-> Now — the obvious objection is that harder cases take longer, and harder cases get
-> refused. But if that were true, refusals would climb steadily the longer you wait. They
-> don't. They spike on one day and then *fall*.
->
-> **Difficulty doesn't make a cliff edge. A deadline does.**"
+> **Waltham Forest** is the exception that proves it — it's flat, no penalty at all. But
+> it's one of only two. **Sixteen of eighteen boroughs** approve less when they decide
+> against the clock. Across London, **82% down to 72%**."
 
 ---
 
-## 2:00 — It's a choice *(20s)*
+## 1:45 — Feature discovery *(45s)*  ← **the heart of it**
 
-> "And this isn't physics. **Kingston** decides **38.9%** of applications on the deadline.
-> **Merton** decides **1.6%** — comparable volume, same law, same clock.
+`[scroll to Feature discovery]`
+
+> "So we asked the other half of the question — not *when*, but *what*.
 >
-> **Twenty-four times the difference.** Somebody already knows how not to do this."
+> Think about asking a neighbour for a favour. *'Can you water my plants?'* — yes, of
+> course. *'Can you look after my dog for a month?'* — suddenly there are questions. Same
+> neighbour. Different ask.
+>
+> Planning works exactly like that, and we can measure it. We ran the **description** of
+> every application — the applicant's own words — through a text model. It had never been
+> told what any of these things mean.
+>
+> It learned the size of the ask. **Rooflights: 84% approved.** **Basements: 84%.** Then
+> it falls — **new dwelling, 71%. Change of use, 68%. Converting a house into flats, 66%.**
+> Eighteen points below the London average.
+>
+> Nobody labelled these categories. **The words did it.** Ask for more, get refused more."
 
 ---
 
-## 2:20 — We tried to break it *(25s)*
+## 2:30 — The classifier *(25s)*
 
-> "We spent most of today trying to kill this, not prove it. Six ways it could have been a
-> data glitch — wrong date field, deadline extensions, one odd year, one broken borough,
-> auto-stamped dates, a bulk upload.
+`[scroll to The classifier — the example is already typed]`
+
+> "So we built the thing that doesn't exist yet. Type what you want to build, pick your
+> borough.
 >
-> It survived all six. The strongest one: **when a council agrees an extension, its target
-> date moves** — and we measured against each council's *own* target. So it can't be
-> extensions.
+> `[point at the result]`
 >
-> And it isn't overwork either. We checked — the busiest boroughs aren't the worst."
+> Two-storey side extension and loft conversion in Kingston — **49%**. The baseline here
+> is 78%, so this is a genuinely risky application, and it tells you **which words** did
+> the damage.
+>
+> Trained on **122,000** decisions, tested on **28,000** it had never seen. **ROC-AUC
+> 0.71**, and it runs entirely in your browser."
 
 ---
 
-## 2:45 — The ask *(15s)*
+## 2:55 — Close *(15s)*
 
 > "The 8-week target was meant to stop councils sitting on applications. It's become
-> something they manage *to*. And the boroughs bunching hardest lose most on appeal —
-> **Barnet loses 42%** — so the time saved gets spent again, and the applicant pays twice.
+> something they manage *to*.
 >
-> **Measure decisions that survive appeal. Not decisions issued within 8 weeks.**
->
-> And somebody should go ask Merton how they do it."
+> **Measure decisions that survive appeal — not decisions issued inside 8 weeks.**"
+
+---
+
+## Driver's cue sheet
+
+| Cue | Action |
+|---|---|
+| "We found one" | stay at the top |
+| "In Southwark" | scroll to map, **Approval rate** |
+| "And how long it takes" | click **Decision time** |
+| "This is every decision" | scroll to the spike, **then stop moving** |
+| "And it costs you" | scroll to 16-of-18 |
+| "not *when*, but *what*" | scroll to Feature discovery |
+| "So we built the thing" | scroll to The classifier |
+| "The 8-week target was meant to" | leave it on screen |
+
+**Don't touch anything during the spike chart.** Two seconds of stillness is what makes it land.
 
 ---
 
@@ -114,57 +137,37 @@
 
 | | |
 |---|---|
-| Decisions analysed | **149,813** · 18 boroughs · 2018–2025 |
-| Land on the exact deadline | **21.6%** — 34,051 |
-| Times more than expected | **10.2×** |
-| Day before / on / after | 10,825 / **34,051** / 2,329 |
-| Approved normally vs in the rush | **82.1% → 71.9%** (−10.2 pp) |
-| Boroughs showing the gap | **16 of 18** |
-| Worst / best borough | Kingston **38.9%** · Merton **1.6%** |
-| Barnet appeal losses | **41.6%** |
-
-**Biggest approval gaps** (for picking a borough live): Islington −22.8 · Tower Hamlets
-−17.9 · Sutton −16.7 · Richmond −16.2 · Lambeth −14.7.
+| Decisions analysed | **150,879** · 18 boroughs · 2018–2025 |
+| On the deadline | **33,227** — 1 in 5 — **10.4×** expected |
+| Neighbouring day | ~**3,200** |
+| Approved normally → in the rush | **82.1% → 71.9%** · **16 of 18** boroughs |
+| Kensington | 93% → 83% (**−9.9**) |
+| Waltham Forest | 75% → 75% (**+0.4**) — the exception |
+| Southwark / Barking | **92%** / **73%** approval |
+| Redbridge / Bromley | **45** / **63** days |
+| Rooflights / flats conversion | **84.1%** / **66.1%** vs **79.9%** average |
+| Classifier | ROC-AUC **0.7103**, 122k train / 28k test |
 
 ---
 
 ## If asked
 
-**"Isn't this already known?"** ← *the most likely challenge, from a planner*
-> "You may well already suspect it — people in planning talk about the 8-week target
-> driving behaviour. What we haven't had is a number. Now we do: one in five, ten times
-> the expected rate, and it costs about ten points of approval."
-
-**"Did you build a model?"**
-> "Yes — to test one thing: is this about the applications or about the institutions? It
-> beats simply looking up your borough by 13%. That small margin is the answer. Once you
-> know the council, knowing what's being built adds almost nothing. It's the council, not
-> your application. We're not proposing to deploy it — the table's on the page."
+**"Isn't this already known?"**
+> "If you work in planning you may suspect it. What we haven't had is a number. Now we do —
+> one in five, ten times expected, and it costs about ten points of approval."
 
 **"Aren't councils just overloaded?"**
-> "We tested it. Sorted by how many applications came in that week, the rates run 22, 22,
-> 21, 20, 23 percent — flat, and the busiest group isn't the worst. It isn't capacity."
+> "We checked. Sorted by weekly intake the rates run 22, 22, 21, 20, 23 percent — flat, and
+> the busiest group isn't the worst. It isn't capacity."
 
-**"Are you saying the deadline causes refusals?"**
-> "No — it's associated, not proven. What we can say is it's a sharp break at one exact
-> point, which rules out the obvious explanation. We can't see case complexity or
-> negotiation history, and that's on the page."
+**"Does the deadline *cause* the refusals?"**
+> "Associated, not proven. But it's a sharp break at one exact day, which rules out
+> 'harder cases take longer' — difficulty doesn't make a cliff edge."
 
 **"Why only 18 boroughs?"**
-> "Five don't publish a target decision date at all — Brent, Wandsworth, Newham, Hounslow,
-> Greenwich. We dropped eight more on data quality. Havering records a 0.0% refusal rate,
-> which isn't credible. All named on the page."
+> "Five publish no target decision date at all. We dropped eight more on data quality —
+> Havering records a 0.0% refusal rate, which isn't credible. All named on the map."
 
 **"Where's the data from?"**
-> "343,000 London planning applications from UK PlanIt, from the hackathon Drive.
-> One table, no joins, nothing licence-restricted. No WhereToBuild data in this at all."
-
----
-
-## Demo mechanics
-
-- Page **already open**, scrolled to top, dropdowns showing. Never open it live.
-- Ask for a borough from the room. Have Sutton / Richmond / Islington ready if nobody answers.
-- Hover one bar on the spike chart so they see it's real data.
-- Finish on the six-checks section and **leave it on screen** for questions.
-- **Time it out loud twice before 17:30.** The whole thing is ~3:00 with no slack.
+> "343,000 London applications from UK PlanIt, scraped and filtered by Jamie who runs this
+> event. One table, no joins, nothing licence-restricted."
