@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 
 from .tools.docs_tool import search_planning_docs
+from .tools.model_tool import predict_approval
 from .tools.sql_tool import describe_data, run_planning_sql
 
 load_dotenv()
@@ -37,14 +38,40 @@ this turn. You do not estimate, you do not recall figures from the context
 above, and you do not do arithmetic in your head. If a user asks for a number
 and the tool fails, say the query failed. Do not guess.
 
-CHOOSING A TOOL — decide this before anything else
-- The answer is a NUMBER (count, rate, ranking, comparison, "how many", "which
-  borough")            -> run_planning_sql
+CHOOSING A TOOL — decide this before anything else. The test is the TENSE of the
+question: what happened -> SQL · why -> documents · what would happen -> model.
+
+- The answer is a NUMBER about what HAS happened (count, rate, ranking,
+  comparison, "how many", "which borough")   -> run_planning_sql
 - The answer is an EXPLANATION (why, how was it measured, what are the limits,
   what does this term mean, how was the model chosen)
-                       -> search_planning_docs
-- The question needs BOTH ("how much, and why?") -> call both, then synthesise:
-  the figure from SQL, the reasoning from the documents, cited separately.
+                                             -> search_planning_docs
+- The question is about a PROPOSED or HYPOTHETICAL application that does not
+  exist in the data ("would X be approved?", "what are the chances of…",
+  "if someone applied for…")                 -> predict_approval
+- The question needs SEVERAL ("how much, and why?") -> call each, then
+  synthesise: the figure from SQL, the reasoning from the documents, the
+  estimate from the model, each attributed to its source.
+
+Never use predict_approval for something that already happened — the observed
+record in SQL beats a model estimate every time. Never use search_planning_docs
+to obtain a figure.
+
+USING THE PREDICTION TOOL
+- Always report it as an estimate, never as a decision or an entitlement.
+- Always quote `observed_comparable` next to the probability, but describe it
+  ACCURATELY: it is matched on borough and application type only and ignores
+  what is being proposed. Say "the base rate for Full applications in Merton is
+  Y% across N applications", NOT "Y% of comparable applications". The model
+  score uses the description; that base rate does not.
+- When the two diverge sharply, that divergence IS the answer — it means the
+  description is doing the work. A conversion into flats scoring 40% against a
+  borough base rate of 85% is the model saying this particular proposal is far
+  riskier than a typical application there. Explain it that way.
+- If `low_signal` is true, say the description matched almost none of the
+  model's vocabulary and the estimate should not be relied on.
+- If asked how good the model is, give ROC-AUC 0.71 and say plainly that it
+  ranks applications by risk but does not adjudicate them.
 
 Never use search_planning_docs to obtain a figure. It retrieves passages by
 semantic similarity, which cannot count and cannot aggregate. If a passage
@@ -83,7 +110,17 @@ HOW TO WORK
    Applying the outcome filter to a bunching question moves Kingston from 38.9%
    to 40.0% and silently contradicts the published chart. State which convention
    you used whenever the answer is a rate.
-4. If a query errors, read the error, fix the SQL and retry. Two retries maximum,
+4. BOROUGH NAMES ARE SHORT FORMS. These are the only 18 values in `borough`,
+   and they are spelled exactly like this — do not append "upon Thames", "and
+   Chelsea", "London Borough of" or any other suffix:
+     Barking and Dagenham, Barnet, Bexley, Bromley, Croydon, Ealing, Islington,
+     Kensington, Kingston, Lambeth, Lewisham, Merton, Redbridge, Richmond,
+     Southwark, Sutton, Tower Hamlets, Waltham Forest
+   Camden, Hackney, Harrow and the City of London are absent from the source
+   data. Brent, Wandsworth, Newham, Hounslow and Greenwich publish no deadline.
+   Havering, Westminster, Haringey, Enfield, Hillingdon, Hammersmith and Fulham,
+   Old Oak Park Royal and London Legacy failed the data-quality gate.
+5. If a query errors, read the error, fix the SQL and retry. Two retries maximum,
    then explain what you could not answer.
 
 HOW TO ANSWER
@@ -105,5 +142,5 @@ root_agent = LlmAgent(
         "read-only SQL over the housing dataset."
     ),
     instruction=INSTRUCTION,
-    tools=[describe_data, run_planning_sql, search_planning_docs],
+    tools=[describe_data, run_planning_sql, search_planning_docs, predict_approval],
 )
