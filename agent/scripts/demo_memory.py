@@ -10,7 +10,11 @@ visible rather than asserted:
   ACT 2  STATE    the figures ledger — structured data the tools wrote as they
                   ran, queried back without re-running a single SQL statement.
   ACT 3  MEMORY   a NEW session, with the previous conversation's history gone
-                  from context, recalling it through the memory service.
+                  from context, recalling it through the memory service — and
+                  the same question asked abstractly, which retrieves worse,
+                  because the in-memory service matches keywords rather than
+                  meaning. Shown rather than hidden: it is the honest answer to
+                  "what would you change for production?".
   ACT 4  SHARING  a second agent, with its own instruction and its own tools,
                   reading the first agent's figures out of shared state.
 
@@ -113,7 +117,34 @@ async def main() -> None:
 
     second = await session_service.create_session(app_name=APP, user_id=USER)
     print(f"{DIM}  (now in session {second.id[:8]}… — the conversation above is NOT in context){RESET}")
-    await ask(runner, second.id, "Which boroughs did I ask you about earlier?")
+
+    print(f"\n{DIM}  3a. a question whose WORDS appear in the stored conversation{RESET}")
+    await ask(runner, second.id, "What did I ask you about deadline decisions earlier?")
+
+    print(
+        f"\n{DIM}  3b. the same question asked ABSTRACTLY — no shared words with{RESET}\n"
+        f"{DIM}      the stored turns, which said 'Kingston' and 'Merton', never 'borough'{RESET}"
+    )
+    third = await session_service.create_session(app_name=APP, user_id=USER)
+    await ask(runner, third.id, "Which boroughs did I ask you about earlier?")
+    print(
+        f"\n{BOLD}  ⚠️  3b IS NOT RELIABLE — run it twice and you may get two answers.{RESET}\n"
+        f"{DIM}      That inconsistency is the lesson, not a bug to hide.\n\n"
+        f"      ADK's InMemoryMemoryService says it in its own docstring: 'uses\n"
+        f"      keyword matching instead of semantic search... for testing and\n"
+        f"      development only'. The stored turns say 'Kingston' and 'Merton';\n"
+        f"      they never say 'borough'. So 3b has no content word to match on and\n"
+        f"      falls back to filler — 'which', 'you', 'about'. Sometimes that drags\n"
+        f"      in the comparison turn, which happens to name both boroughs, and the\n"
+        f"      answer looks right. Sometimes it doesn't. It is luck, not retrieval.\n\n"
+        f"      3a works consistently because 'deadline' and 'decisions' are actually\n"
+        f"      in the stored text.\n\n"
+        f"      This is the mirror image of the text-to-SQL argument. Vector search\n"
+        f"      can't count, so numbers go to SQL. Keyword search can't generalise,\n"
+        f"      so production memory needs embeddings — Vertex AI Memory Bank, or any\n"
+        f"      semantic store. Swapping it is a service change, not a rewrite: the\n"
+        f"      agent code does not move.{RESET}"
+    )
 
     # ---------------------------------------------------------------- ACT 4
     banner(
@@ -149,7 +180,8 @@ async def main() -> None:
     print(
         "  SESSION  history in context      -> 'And Merton?' needed no subject\n"
         "  STATE    structured scratchpad   -> figures recalled without re-querying\n"
-        "  MEMORY   across sessions         -> a new session reached the old one\n"
+        "  MEMORY   across sessions         -> a new session reached the old one,\n"
+        "           but by KEYWORD, not meaning. Production needs a semantic store.\n"
         "  SHARING  state travels with the session, not the agent\n"
         "           -> the auditor inherited the FIGURES but not the instruction\n"
         "              and not the tools. Context isolation is the feature: each\n"
