@@ -14,8 +14,15 @@ outputs/*.png
 
 # ---- python ----
 .venv/
+.venv-agent/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# ---- agent secrets & local stores ----
+.env
+agent/.env
+agent/.chroma/
+agent/**/*.sqlite3
 
 .DS_Store
