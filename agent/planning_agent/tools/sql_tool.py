@@ -25,6 +25,8 @@ import re
 import sqlite3
 from pathlib import Path
 
+from .ledger import record
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DB_PATH = REPO_ROOT / "data" / "raw" / "housing.sqlite"
 FINDINGS_PATH = REPO_ROOT / "outputs" / "findings.json"
@@ -124,7 +126,7 @@ def _guard(sql: str) -> str | None:
     return None
 
 
-def run_planning_sql(sql: str) -> dict:
+def run_planning_sql(sql: str, tool_context=None) -> dict:
     """Run a read-only SQL query against the London planning decisions database.
 
     Use this for ANY question with a number in the answer — counts, rates,
@@ -163,6 +165,16 @@ def run_planning_sql(sql: str) -> dict:
         columns = [d[0] for d in cur.description] if cur.description else []
         truncated = len(rows) > MAX_ROWS
         rows = rows[:MAX_ROWS]
+        # A single-cell result is a figure the agent is about to state, so it
+        # goes in the ledger. Wider result sets are tables, not claims.
+        if len(rows) == 1 and len(rows[0]) == 1:
+            record(
+                tool_context,
+                source="sql",
+                label=columns[0] if columns else "result",
+                value=rows[0][0],
+                detail=" ".join(stripped.split()),
+            )
         return {
             "ok": True,
             "sql": stripped,

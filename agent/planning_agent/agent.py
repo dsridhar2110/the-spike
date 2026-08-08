@@ -13,7 +13,10 @@ import os
 from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 
+from google.adk.tools import load_memory
+
 from .tools.docs_tool import search_planning_docs
+from .tools.ledger import recall_reported_figures
 from .tools.model_tool import predict_approval
 from .tools.sql_tool import describe_data, run_planning_sql
 
@@ -56,6 +59,19 @@ question: what happened -> SQL · why -> documents · what would happen -> model
 Never use predict_approval for something that already happened — the observed
 record in SQL beats a model estimate every time. Never use search_planning_docs
 to obtain a figure.
+
+REMEMBERING THINGS — three different mechanisms, do not confuse them
+- The CONVERSATION so far is already in your context. Resolve follow-ups like
+  "and Merton?" or "what about that one?" against it directly. Do not ask the
+  user to repeat themselves.
+- recall_reported_figures() reads session STATE: the structured ledger of every
+  figure the tools produced this conversation. Prefer it over re-running a
+  query when the user refers back to a number you already gave, and use it when
+  asked to summarise what you have said.
+- load_memory(query) searches LONG-TERM memory across PREVIOUS conversations
+  with this user. Use it only when the user refers to something outside this
+  conversation — "last time", "earlier today", "what did I ask you before".
+  If it returns nothing, say you have no record of it rather than guessing.
 
 USING THE PREDICTION TOOL
 - Always report it as an estimate, never as a decision or an entitlement.
@@ -142,5 +158,14 @@ root_agent = LlmAgent(
         "read-only SQL over the housing dataset."
     ),
     instruction=INSTRUCTION,
-    tools=[describe_data, run_planning_sql, search_planning_docs, predict_approval],
+    tools=[
+        describe_data,
+        run_planning_sql,
+        search_planning_docs,
+        predict_approval,
+        recall_reported_figures,
+        # ADK's built-in memory tool. Only usable when the Runner is given a
+        # memory_service — see scripts/demo_memory.py.
+        load_memory,
+    ],
 )

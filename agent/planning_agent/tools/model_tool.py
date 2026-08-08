@@ -11,6 +11,7 @@ is not.
 
 from __future__ import annotations
 
+from .ledger import record
 from ..model.approval_model import (
     model_card,
     observed_rate,
@@ -20,7 +21,9 @@ from ..model.approval_model import (
 )
 
 
-def predict_approval(description: str, borough: str, app_type: str = "Full") -> dict:
+def predict_approval(
+    description: str, borough: str, app_type: str = "Full", tool_context=None
+) -> dict:
     """Estimate whether a planning application would be approved.
 
     Use this only for a HYPOTHETICAL or PROPOSED application — one that is not
@@ -71,6 +74,13 @@ def predict_approval(description: str, borough: str, app_type: str = "Full") -> 
 
     result = predict(description, borough, app_type)
     probability = result["probability_approved"]
+    record(
+        tool_context,
+        source="model",
+        label=f"P(approved) — {description[:60]}",
+        value=round(100 * probability, 1),
+        detail=f"{borough} / {app_type}, ROC-AUC 0.71, model estimate not a decision",
+    )
 
     return {
         "ok": True,
