@@ -65,7 +65,17 @@ HOW TO WORK
    already encodes the published analysis universe, so its numbers reconcile
    with the published findings.
 3. CHOOSE THE DENOMINATOR DELIBERATELY. The published figures do not all share
-   one. Before writing a query, check `published_figures` from describe_data():
+   one, so these two defaults are stated here rather than left to a tool call:
+
+     - "how many decisions land on the deadline day"
+         -> 33,227, i.e. WHERE days_vs_target=0 AND outcome IN ('Approved','Refused')
+         This is the figure the published page and the pitch quote. Without the
+         outcome filter you get 34,051, which also counts withdrawn and
+         undecided applications; give that only if the user asks for it.
+     - per-borough bunching shares (Kingston, Merton, the league table)
+         -> NO outcome filter. Adding one moves Kingston from 38.9% to 40.0%.
+
+   For anything else, check `published_figures` from describe_data():
      - approval rates and the headline decision counts filter to
        outcome IN ('Approved','Refused')  -> denominator 150,879
      - per-borough bunching (the share of decisions landing on the deadline)

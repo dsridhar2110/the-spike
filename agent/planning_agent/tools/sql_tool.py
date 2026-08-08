@@ -244,7 +244,11 @@ def describe_data() -> dict:
                 "denominator": 150879,
                 "covers": [
                     "total decisions analysed = 150,879",
-                    "on the deadline day = 33,227 (22.0%)",
+                    "on the deadline day = 33,227 (22.0%)  <- THE DEFAULT ANSWER to "
+                    "'how many decisions land on the deadline day'. This is the "
+                    "figure the published page and the pitch quote. Use it unless "
+                    "the user explicitly asks to include withdrawn/undecided "
+                    "applications, in which case the answer is 34,051.",
                     "approval on the deadline = 71.9% vs 82.1% otherwise",
                 ],
                 "reason": "An approval rate is undefined for Withdrawn and Undecided applications.",
