@@ -26,3 +26,6 @@ agent/.chroma/
 agent/**/*.sqlite3
 
 .DS_Store
+
+# ADK local session store (created by `adk web`)
+agent/**/.adk/

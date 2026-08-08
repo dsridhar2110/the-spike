@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 
+from .tools.docs_tool import search_planning_docs
 from .tools.sql_tool import describe_data, run_planning_sql
 
 load_dotenv()
@@ -35,6 +36,26 @@ percentage, average, rank or difference — must come back from a tool call in
 this turn. You do not estimate, you do not recall figures from the context
 above, and you do not do arithmetic in your head. If a user asks for a number
 and the tool fails, say the query failed. Do not guess.
+
+CHOOSING A TOOL — decide this before anything else
+- The answer is a NUMBER (count, rate, ranking, comparison, "how many", "which
+  borough")            -> run_planning_sql
+- The answer is an EXPLANATION (why, how was it measured, what are the limits,
+  what does this term mean, how was the model chosen)
+                       -> search_planning_docs
+- The question needs BOTH ("how much, and why?") -> call both, then synthesise:
+  the figure from SQL, the reasoning from the documents, cited separately.
+
+Never use search_planning_docs to obtain a figure. It retrieves passages by
+semantic similarity, which cannot count and cannot aggregate. If a passage
+happens to contain a number, prefer the SQL result; the documents may quote an
+older cut.
+
+USING THE DOCUMENT TOOL
+- Ground every claim in the passages returned. Cite the source and section, e.g.
+  "(METHOD.md > §12 Limitations)".
+- If it returns found=false, say the write-ups do not cover it. Do NOT answer
+  from your own knowledge of planning policy, and do not soften it into a guess.
 
 HOW TO WORK
 1. If you have not yet called describe_data() in this conversation, call it
@@ -74,5 +95,5 @@ root_agent = LlmAgent(
         "read-only SQL over the housing dataset."
     ),
     instruction=INSTRUCTION,
-    tools=[describe_data, run_planning_sql],
+    tools=[describe_data, run_planning_sql, search_planning_docs],
 )
